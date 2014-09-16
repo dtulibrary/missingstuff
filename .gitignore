@@ -17,3 +17,18 @@
 # Ignore jetty directory (from hydra-jetty)
 /jetty
 
+/config/*.local.yml
+/config/*.local.rb
+/config/environments/*.local.yml
+/config/environments/*.local.rb
+
+# Ignore vim .swp files
+.*.swp
+.DS_Store
+.powrc
+*.tmproj
+
+coverage
+public/assets
+
+.project
