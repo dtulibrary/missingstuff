@@ -9,7 +9,7 @@ end
 if(variables.include?(:host))
   set :application, "#{host}"
 else
-  set :application, 'printedjournals.vagrant.vm'
+  set :application, 'missingstuff.vagrant.vm'
 end
 
 set :deploy_to, "/var/www/#{application}"
