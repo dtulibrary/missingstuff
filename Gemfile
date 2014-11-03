@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'worthwhile'
-gem 'capistrano', '~> 2.15.5', :group => :development
+gem 'capistrano', '~> 2.15.5', group: :development
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.2.rc1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: [:development, :test]
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
