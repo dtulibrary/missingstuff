@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'worthwhile'
+gem 'capistrano', '~> 2.15.5', :group => :development
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.2.rc1'
