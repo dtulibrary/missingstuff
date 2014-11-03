@@ -4,3 +4,12 @@ development:
 test:
   host: localhost
   port: 6379
+unstable:
+  host: localhost
+  port: 6379
+staging:
+  host: localhost
+  port: 6379
+production:
+  host: localhost
+  port: 6379
