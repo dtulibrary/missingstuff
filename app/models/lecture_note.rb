@@ -1,6 +1,6 @@
 # Generated via
 #  `rails generate worthwhile:work LectureNotes`
-class LectureNotes < ActiveFedora::Base
+class LectureNote < ActiveFedora::Base
   include ::CurationConcern::Work
-  include ::CurationConcern::WithBasicMetadata
+  include ::WithMxdMetadata
 end

@@ -13,6 +13,9 @@ module Missingstuff
       g.test_framework :rspec, :spec => true
     end
 
+    # Custom directories with classes and modules you want to be autoloadable.
+    config.autoload_paths += Dir["#{config.root}/app/models/**/"]
+
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

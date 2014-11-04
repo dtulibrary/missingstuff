@@ -3,5 +3,5 @@
 
 class CurationConcern::LectureNotesController < ApplicationController
   include Worthwhile::CurationConcernController
-  set_curation_concern_type LectureNotes
+  set_curation_concern_type LectureNote
 end
