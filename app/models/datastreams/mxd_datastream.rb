@@ -5,9 +5,6 @@ class MxdDatastream < ActiveFedora::OmDatastream
     t.title
     t.description
     t.subject
-    t.created     # required by Worthwhile
-    t.date_modified   # required by Worthwhile
-    t.date_uploaded   # required by Worthwhile
     t.person {
       t.first_name
       t.last_name

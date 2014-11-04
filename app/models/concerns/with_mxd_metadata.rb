@@ -6,11 +6,10 @@ module WithMxdMetadata
     validates_presence_of :title,  message: 'Your work must have a title.'
 
     # Single-value fields
-    # Note: :created, :date_modified, :date_uploaded are required by Worthwhile.  If you don't want them in the MXD, move them to another datastream.
-    has_attributes :created, :date_modified, :date_uploaded, :description, :title, :publication_date, datastream: :descMetadata, multiple: false
+    has_attributes :publication_date, datastream: :descMetadata, multiple: false
 
     # Multi-value fields
-    has_attributes :person, datastream: :descMetadata, multiple: true
+    has_attributes :title, :description, :person, datastream: :descMetadata, multiple: true
   end
 
   # Attributes that require special handling on updates
@@ -25,6 +24,7 @@ module WithMxdMetadata
       self.person(index).last_name = person.fetch(:last_name)
       self.person(index).role = person.fetch(:role)
     end
+    return self.person
   end
 
   # Overrides attributes=
