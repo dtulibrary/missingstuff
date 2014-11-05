@@ -1,0 +1,20 @@
+li.attribute.hierarchical {
+  margin-bottom: 10px;
+
+  .label {
+    text-align: right;
+    width: 200px;
+    float: left;
+    margin-top: .25em;
+    color: black;
+  }
+}
+
+.listing.hierarchical {
+  li {
+    padding-bottom: 1.5em;
+  }
+  span.input-group-btn.field-controls {
+    background-color: ghostwhite;
+  }
+}

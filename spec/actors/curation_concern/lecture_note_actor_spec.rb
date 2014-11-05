@@ -2,7 +2,7 @@
 #  `rails generate worthwhile:work LectureNotes`
 require 'rails_helper'
 
-describe CurationConcern::LectureNotesActor do
+describe CurationConcern::LectureNoteActor do
   it "should have some tests" do
     skip "Add your tests here"
   end

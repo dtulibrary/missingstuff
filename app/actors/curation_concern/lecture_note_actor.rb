@@ -1,6 +1,6 @@
 # Generated via
 #  `rails generate worthwhile:work LectureNotes`
 module CurationConcern
-  class LectureNotesActor < CurationConcern::GenericWorkActor
+  class LectureNoteActor < CurationConcern::GenericWorkActor
   end
 end
