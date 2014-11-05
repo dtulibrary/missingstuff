@@ -14,17 +14,7 @@ module WithMxdMetadata
 
   # Attributes that require special handling on updates
   def special_attributes
-    [:person]
-  end
-
-  def update_people(persons_array)
-    self.person = nil unless persons_array.nil?
-    persons_array.each_with_index do |person, index|
-      self.person(index).first_name = person.fetch(:first_name)
-      self.person(index).last_name = person.fetch(:last_name)
-      self.person(index).role = person.fetch(:role)
-    end
-    return self.person
+    {:person => [:first_name, :last_name, :role]}
   end
 
   # Overrides attributes=
@@ -34,11 +24,15 @@ module WithMxdMetadata
   # All regular attributes are handled with default update_attributes behavior.
   def attributes=(attributes)
     filtered_attributes = attributes.dup
-    special_attributes.each do |attribute|
+    special_attributes.each_pair do |attribute,subs|
       values = filtered_attributes.delete(attribute)
-      method_name = "update_#{attribute.to_s.pluralize}".to_sym
-      if respond_to?(method_name)
-        self.send(method_name, values) unless values.nil?
+      unless values.nil?
+        self.send("#{attribute}=".to_sym, nil)
+        values.each_with_index do |field, index|
+          subs.each do |sub|
+            self.send(attribute,index).send("#{sub}=".to_sym,field.fetch(sub))
+          end
+        end
       end
     end
     super(filtered_attributes)
