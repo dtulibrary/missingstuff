@@ -45,17 +45,19 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
       else
         value = entry.send(subfield_name).first
       end
-      markup << build_form_group(value, subfield_name, index)
+      markup << build_form_group(value, subfield_name, index:index, label: subfield_label(attribute_name, subfield_name))
     end
     markup
   end
 
-  def build_form_group(value, attribute_name, index=nil)
+  def build_form_group(value, attribute_name, options={})
+    group_label = options.fetch(:label, false) ? options.fetch(:label) : attribute_name.to_s.humanize
+    #group_label =  attribute_name.to_s.humanize
     markup = <<-HTML
       <div class="form-group">
-        <label class="col-sm-4 control-label">#{attribute_name.to_s.humanize}</label>
+        <label class="col-sm-4 control-label">#{group_label}</label>
         <div class="col-sm-8">
-          #{build_text_field(value, attribute_name.to_s, index)}
+          #{ build_text_field(value, attribute_name.to_s, options.fetch(:index)) }
         </div>
       </div>
     HTML

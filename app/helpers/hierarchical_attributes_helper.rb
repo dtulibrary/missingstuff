@@ -13,7 +13,7 @@ module HierarchicalAttributesHelper
           subfield_attribute_name = "#{attribute_name}_#{subfield_key}"
           search_field = subfield_attribute_name
           unless subfield_value.nil?
-            subfield_label = subfield_key.to_s.humanize
+            subfield_label = subfield_label(attribute_name, subfield_key)
             subfield_li_value = link_to_if(options[:catalog_search_link], h(subfield_value), catalog_index_path(search_field: search_field, q: h(subfield_value)))
             subfields_markup << %(<li class="attribute subfield #{subfield_attribute_name}"> <div class="label">#{subfield_label}</div> #{subfield_li_value} </li>\n)
           end
@@ -41,6 +41,10 @@ module HierarchicalAttributesHelper
       end
     end
     collection
+  end
+
+  def subfield_label(attribute_name, subfield_name)
+    t("simple_form.labels.#{attribute_name}.#{subfield_name}")
   end
 
 end
