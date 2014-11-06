@@ -6,10 +6,10 @@ module WithMxdMetadata
     validates_presence_of :title,  message: 'Your work must have a title.'
 
     # Single-value fields
-    has_attributes :publication_date, datastream: :descMetadata, multiple: false
+    has_attributes :publication_date, :description, datastream: :descMetadata, multiple: false
 
     # Multi-value fields
-    has_attributes :title, :description, :person, datastream: :descMetadata, multiple: true
+    has_attributes :title, :person, datastream: :descMetadata, multiple: true
   end
 
   # Attributes that require special handling on updates
