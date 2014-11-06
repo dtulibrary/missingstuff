@@ -9,7 +9,6 @@ describe HierarchicalAttributeInput, type: :view do
     render partial: 'curation_concern/base/form', locals: { curation_concern: book }
     expect(rendered).to have_css("ul.listing.hierarchical li.field-wrapper", count:3)
     expect(rendered).to have_field("book_person_0_first_name", with: "Miles" )
-
     expect(rendered).to have_xpath("//input[@name = 'book[person][][first_name]'][@value = 'Miles']")
   end
 end

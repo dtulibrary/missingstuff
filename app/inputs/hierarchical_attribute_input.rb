@@ -2,12 +2,6 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
   include HierarchicalAttributesHelper
 
   def input(wrapper_options)
-    puts "###"
-    puts @builder
-    puts @attribute_name
-    puts @column
-    puts @input_type
-    puts "###"
     @rendered_first_element = false
     input_html_classes.unshift("string")
     input_html_options[:class] << 'multi_value'
