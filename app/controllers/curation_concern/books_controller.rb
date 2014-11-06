@@ -2,6 +2,7 @@
 #  `rails generate worthwhile:work Book`
 
 class CurationConcern::BooksController < ApplicationController
-  include Worthwhile::CurationConcernController
+  include Dtu::CurationConcernController
   set_curation_concern_type Book
+
 end

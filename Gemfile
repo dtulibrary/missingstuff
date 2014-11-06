@@ -38,13 +38,12 @@ gem 'spring',        group: :development
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Use debugger
-gem 'debugger', group: [:development, :test]
-
 
 gem "devise"
 gem "devise-guests", "~> 0.3"
 group :development, :test do
   gem "rspec-rails"
   gem "jettywrapper"
+  gem "factory_girl"
+  gem 'debugger'
 end
