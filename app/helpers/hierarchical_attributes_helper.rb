@@ -1,15 +1,14 @@
-module HierarchicalFieldsHelper
+module HierarchicalAttributesHelper
 
-  def hierarchical_field_to_html(curation_concern, attribute_name, label = nil, options = {})
+  def hierarchical_attribute_to_html(curation_concern, attribute_name, label = nil, options = {})
     if curation_concern.respond_to?(attribute_name)
       markup = ""
-      label ||= derived_label_for(curation_concern, attribute_name)
-      collection = hierarchical_field_collection(curation_concern, attribute_name)
+      collection = hierarchical_attribute_collection(curation_concern, attribute_name)
       return markup if !collection.present? && !options[:include_empty]
       markup << %(<tr><th>#{label}</th>\n<td><ul class='tabular'>)
       collection.each do |entry|
         subfields_markup = "<ul class='tabular'>"
-        subfields_for(attribute_name).each do |subfield_key|
+        subfields_for(curation_concern, attribute_name).each do |subfield_key|
           subfield_value = entry.send(subfield_key).first
           subfield_attribute_name = "#{attribute_name}_#{subfield_key}"
           search_field = subfield_attribute_name
@@ -29,15 +28,11 @@ module HierarchicalFieldsHelper
     end
   end
 
-  def subfields_for(attribute_name)
-    if curation_concern.descMetadata.class.terminology.terms.keys.include?(attribute_name)
-      curation_concern.descMetadata.send(attribute_name).term.children.keys
-    else
-      []
-    end
+  def subfields_for(curation_concern, attribute_name)
+    curation_concern.subfields_for(attribute_name)
   end
 
-  def hierarchical_field_collection(curation_concern, attribute_name)
+  def hierarchical_attribute_collection(curation_concern, attribute_name)
     # By default OM returns the _values_ of nodes rather than the nodes themselves, so we have to build the array of nodes manually.
     begin
       collection = []

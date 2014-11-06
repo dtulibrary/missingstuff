@@ -1,0 +1,6 @@
+<fieldset class="required primary">
+  <%= f.input :title, as: :multi_value %>
+
+  <%= f.input :person, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' } %>
+
+</fieldset>

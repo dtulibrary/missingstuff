@@ -45,5 +45,6 @@ group :development, :test do
   gem "rspec-rails"
   gem "jettywrapper"
   gem "factory_girl"
+  gem "capybara"
   gem 'debugger'
 end

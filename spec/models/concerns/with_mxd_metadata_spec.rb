@@ -12,6 +12,16 @@ describe WithMxdMetadata do
 
   subject { ClassWithMxdMetadata.new({publication_date:"1929",person:[{first_name:"Nella", last_name:"Larsen", role:"author"}]}) }
 
+  it "should track special attributes" do
+    expect(WithMxdMetadata.special_attributes).to eq [:person]
+  end
+
+  describe "#subfields_for" do
+    it "should report the subfields for the specified term" do
+      expect(subject.subfields_for(:person)).to eq([:first_name, :last_name, :role])
+    end
+  end
+
   it "should allow updating nested metadata from hash" do
     subject = Book.new
     update_hash = {"publication_date"=>"1968","person"=>[{"first_name"=>"Joan", "last_name"=>"Didion", "role"=>"author"}, {"first_name"=>"Henry", "last_name"=>"Robbins", "role"=>"editor"}]}.with_indifferent_access

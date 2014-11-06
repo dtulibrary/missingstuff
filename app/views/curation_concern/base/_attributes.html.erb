@@ -6,7 +6,7 @@
   <tbody>
   <%= curation_concern_attribute_to_html(curation_concern, :description, 'Abstract') %>
   <%= curation_concern_attribute_to_html(curation_concern, :creator, 'Creator', { catalog_search_link: true }) %>
-  <%= hierarchical_field_to_html(curation_concern, :person, 'People', { catalog_search_link: true }) %>
+  <%= hierarchical_attribute_to_html(curation_concern, :person, 'People', { catalog_search_link: true }) %>
   <%= curation_concern_attribute_to_html(curation_concern, :contributor, 'Contributors', { catalog_search_link: true }) %>
   <%= curation_concern_attribute_to_html(curation_concern, :subject, "Subject", { catalog_search_link: true }) %>
   <%= curation_concern_attribute_to_html(curation_concern, :publisher, "Publisher") %>

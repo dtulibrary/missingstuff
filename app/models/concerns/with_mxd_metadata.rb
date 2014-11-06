@@ -13,8 +13,8 @@ module WithMxdMetadata
   end
 
   # Attributes that require special handling on updates
-  def special_attributes
-    {:person => [:first_name, :last_name, :role]}
+  def self.special_attributes
+    [:person]
   end
 
   # Overrides attributes=
@@ -24,7 +24,8 @@ module WithMxdMetadata
   # All regular attributes are handled with default update_attributes behavior.
   def attributes=(attributes)
     filtered_attributes = attributes.dup
-    special_attributes.each_pair do |attribute,subs|
+    WithMxdMetadata.special_attributes.each do |attribute|
+      subs = subfields_for(attribute)
       values = filtered_attributes.delete(attribute)
       unless values.nil?
         self.send("#{attribute}=".to_sym, nil)
@@ -36,5 +37,21 @@ module WithMxdMetadata
       end
     end
     super(filtered_attributes)
+  end
+
+  # Lists the term names for the subfields of the attribute identified by attribute_name
+  # Assumes that the term is defined on the descMetadata datastream
+  # @example
+  #   subfields_for(:person)
+  #   => [:first_name, :last_name, :role]
+  def subfields_for(attribute_name)
+    begin
+      term = descMetadata.send(attribute_name).term
+    end
+    if term
+      return term.children.keys
+    else
+      nil
+    end
   end
 end
