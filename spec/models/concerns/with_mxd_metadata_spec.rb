@@ -45,6 +45,12 @@ describe WithMxdMetadata do
     expect(person1.last_name).to eq(["King"])
     expect(person1.role).to eq(["leader"])
   end
+  it "should not create an entry if it only contains empty fields" do
+    expect(subject.person.count).to eq(1)
+    update_hash = {"publication_date"=>"1969","person"=>[{"first_name"=>"Martin Luther", "last_name"=>"King", "role"=>"leader"}, {"first_name"=>"", "last_name"=>"", "role"=>""}]}.with_indifferent_access
+    subject.update(update_hash)
+    expect(subject.person.count).to eq(1)
+  end
   it "should allow emptying out nested metadata" do
     expect(subject.person.count).to eq(1)
     update_hash = {"publication_date"=>"1969","person"=>[]}.with_indifferent_access

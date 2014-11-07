@@ -20,6 +20,16 @@ class SolrDocument
   # and Blacklight::Solr::Document#to_semantic_values
   # Recommendation: Use field names from Dublin Core
   use_extension( Blacklight::Solr::Document::DublinCore)
-  use_extension(BlacklightOaiProvider::SolrDocumentExtension)
+  use_extension(::BlacklightOaiProvider::SolrDocumentExtension)
+
+  field_semantics.merge!(
+      title: "desc_metadata__title_tesim",
+      description: "desc_metadata__description_tesim",
+      creator: "desc_metadata__creator_tesim",
+      publisher: "desc_metadata__publisher_tesim",
+      language: "desc_metadata__language_tesim",
+      subject: "misc_metadata__subject_tesim",
+      format: "desc_metadata__format_tesim"
+  )
 
 end
