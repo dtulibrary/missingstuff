@@ -27,7 +27,8 @@
 
       this._on( this.element, {
         "click .remove": "remove_from_list",
-        "click .add": "add_to_list"
+        "click .add": "add_to_list",
+        "keypress": "keypress_handler"
       });
     },
 
@@ -39,8 +40,8 @@
           $removeControl = this.remover.clone(),
           $newField = $activeField.clone(),
           $listing = $('.listing', this.element),
-          $warningMessage  = $("<div class=\'message has-warning\'>cannot add new empty field</div>");
-      if ($activeField.children('input').val() === '') {
+          $warningMessage  = $("<div class=\'message has-warning\'>Please fill in this field before adding another.</div>");
+      if ( this._inputsAreEmpty($activeField) ) {
           $listing.children('.has-warning').remove();
           $listing.append($warningMessage);
       }
@@ -60,7 +61,6 @@
 
     remove_from_list: function( event ) {
       event.preventDefault();
-
       $(event.target)
         .parents('.field-wrapper')
         .remove();
@@ -68,10 +68,36 @@
       this._trigger("remove");
     },
 
+    keypress_handler: function(event) {
+        // When user presses 'Enter' on inputs within hierarchical attributes, simulate 'Tab' behavior.
+        if(event.which == 13) {
+            var $target = $(event.target)
+            if ( $target.hasClass('hierarchical_attribute') ) {
+                event.preventDefault();
+                $inputs = $target.closest('.field-wrapper').find(':input')
+                var nextInput = $inputs.get($inputs.index($target) + 1);
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        }
+    },
+
     _destroy: function() {
       this.actions.remove();
       $('.field-wrapper', this.element).removeClass("input-append");
       this.element.removeClass( "managed" );
+    },
+
+    _inputsAreEmpty: function( wrapper ) {
+        var empty =  true;
+        wrapper.find('input').each( function() {
+            if ( $(this).val() ) {
+                empty =  false;
+            }
+        });
+        return empty;
     }
+
   });
 })(jQuery);

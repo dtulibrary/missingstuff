@@ -11,7 +11,7 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
     collection.each_with_index do |entry,i|
       unless entry.to_s.strip.blank?
         populated_field_groups << <<-HTML
-          <li class="field-wrapper">
+          <li class="field-wrapper hierarchical">
             #{build_subfields(entry, i)}
           </li>
         HTML
@@ -19,7 +19,7 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
     end
 
     empty_field_group = <<-HTML
-      <li class="field-wrapper">
+      <li class="field-wrapper hierarchical">
         #{build_subfields(nil, nil)}
       </li>
     HTML
