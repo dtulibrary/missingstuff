@@ -1,3 +1,20 @@
+GIT
+  remote: git://github.com/cbeer/blacklight_oai_provider.git
+  revision: f603f8c0db19baf7a9a11b8a6a682697c8d23e2f
+  specs:
+    blacklight_oai_provider (0.1.1)
+      blacklight (>= 3.0)
+      oai
+      rails (>= 3.0)
+
+PATH
+  remote: ../ruby-oai
+  specs:
+    oai (0.3.1)
+      builder (>= 3.1.0)
+      faraday
+      faraday_middleware
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -131,6 +148,8 @@ GEM
       activesupport (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     fastercsv (1.5.5)
     ffi (1.9.6)
     foreigner (1.6.1)
@@ -488,6 +507,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  blacklight_oai_provider!
   capistrano (~> 2.15.5)
   capybara
   coffee-rails (~> 4.0.0)
@@ -498,6 +518,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jettywrapper
   jquery-rails
+  oai!
   pg
   rails (= 4.1.2.rc1)
   rspec-rails

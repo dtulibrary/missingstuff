@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'worthwhile'
 gem 'capistrano', '~> 2.15.5', group: :development
+gem 'blacklight_oai_provider' , github:'cbeer/blacklight_oai_provider'
+gem 'oai' , github:'code4lib/ruby-oai'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.2.rc1'
