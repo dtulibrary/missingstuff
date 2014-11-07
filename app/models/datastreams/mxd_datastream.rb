@@ -2,13 +2,35 @@ class MxdDatastream < ActiveFedora::OmDatastream
 
   set_terminology do |t|
     t.root(:path=>"mxd")
+    t.lang
+    t.review
+    t.level
     t.title
+    t.subtitle
     t.description
-    t.subject
+    t.keyword
     t.person {
       t.first_name
       t.last_name
       t.role
+    }
+    t.organisation {
+      t.level1
+      t.level2
+      t.level3
+      t.level4
+      t.role
+    }
+    t.event {
+        t.title
+        t.start
+        t.end
+        t.place
+    }
+    t.book {
+        t.publisher
+        t.edition
+        t.isbn
     }
     t.publication_date
     t.mxd_type(path:"type")
