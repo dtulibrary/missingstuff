@@ -1,5 +1,5 @@
 module HierarchicalAttributesHelper
-
+  include ActionView::Helpers::TagHelper  # This is so failed translation lookups can use content_tag method
   def hierarchical_attribute_to_html(curation_concern, attribute_name, label = nil, options = {})
     if curation_concern.respond_to?(attribute_name)
       markup = ""
