@@ -1,17 +1,21 @@
 class MxdDatastream < ActiveFedora::OmDatastream
 
+  def prefix
+    "desc_metadata__"
+  end
+
   set_terminology do |t|
     t.root(:path=>"mxd")
-    t.title
-    t.description
-    t.subject
+    t.title(index_as: [:stored_searchable, :facetable])
+    t.description(index_as: [:stored_searchable, :facetable])
+    t.subject(index_as: [:stored_searchable, :facetable])
     t.person {
-      t.first_name
-      t.last_name
+      t.first_name(index_as: [:stored_searchable, :facetable])
+      t.last_name(index_as: [:stored_searchable, :facetable])
       t.role
     }
-    t.publication_date
-    t.mxd_type(path:"type")
+    t.publication_date(index_as: [:stored_searchable, :facetable])
+    t.mxd_type(path:"type", index_as: [:stored_searchable, :facetable])
   end
 
   def self.xml_template
