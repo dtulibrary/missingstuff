@@ -1,9 +1,12 @@
 <fieldset class="required primary">
-  <%= f.input :title, as: :multi_value %>
+  <%= f.input :title  %>
+
+  <%= f.input :subtitle, as: :multi_value %>
 
   <%= f.input :person, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' } %>
 
-  <%= f.input :description, as: :text, input_html: { rows: '14', type: 'textarea'} %>
+  <%= f.input :organisation, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' } %>
 
+  <%= f.input :description, as: :text, input_html: { rows: '14', type: 'textarea'} %>
 
 </fieldset>

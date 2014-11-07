@@ -1,7 +1,13 @@
 en:
   simple_form:
     labels:
+      subtitle: "Sub-Title"
       person:
         first_name: "First Name"
         last_name: "Last Name"
         role: "Role"
+      organisation:
+        level1: "Level 1"
+        level2: "Level 2"
+        level3: "Level 3"
+        level4: "Level 4"
