@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :book do
-    title ["Kind of Blue"]
+    title "Kind of Blue"
 
     # Sets depositor metadata (required)
     ignore do

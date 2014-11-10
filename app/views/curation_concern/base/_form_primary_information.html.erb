@@ -9,4 +9,15 @@
 
   <%= f.input :description, as: :text, input_html: { rows: '14', type: 'textarea'} %>
 
+  <% if curation_concern.respond_to?(:lecture_note) %>
+    <%= f.input :event, as: :hierarchical_attribute %>
+  <% end %>
+
+  <% if curation_concern.respond_to?(:book) %>
+    <%= f.input :book, as: :hierarchical_attribute %>
+  <% end %>
+
+  <%= f.input :publication_date  %>
+
+  <%= f.input :requester  %>
 </fieldset>
