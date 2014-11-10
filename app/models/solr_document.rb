@@ -22,6 +22,8 @@ class SolrDocument
   use_extension( Blacklight::Solr::Document::DublinCore)
   use_extension(::BlacklightOaiProvider::SolrDocumentExtension)
 
+  use_extension(MxdSolrDocumentExtension)
+
   field_semantics.merge!(
       title: "desc_metadata__title_tesim",
       description: "desc_metadata__description_tesim",
