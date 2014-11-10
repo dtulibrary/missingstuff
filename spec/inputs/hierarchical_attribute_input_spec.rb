@@ -3,7 +3,7 @@ require 'simple_form'
 
 describe HierarchicalAttributeInput, type: :view do
 
-  let(:book) { FactoryGirl.create(:book) }
+  let(:book) { FactoryGirl.create(:kind_of_blue) }
 
   it "should render a field set that includes inputs for all of the attribute's subfields" do
     render partial: 'curation_concern/base/form', locals: { curation_concern: book }

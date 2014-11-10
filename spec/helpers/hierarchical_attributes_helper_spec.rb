@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'erb'
 
 describe HierarchicalAttributesHelper do
-  let(:curation_concern) { FactoryGirl.create(:book) }
+  let(:curation_concern) { FactoryGirl.create(:kind_of_blue) }
 
   subject { hierarchical_attribute_to_html(curation_concern, :person, "Person", {}) }
 

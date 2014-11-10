@@ -11,7 +11,7 @@ class CatalogController < ApplicationController
             :admin_email => 'root@localhost'
         },
         :document => {
-            :timestamp => 'timestamp',
+            :timestamp => 'system_create_dtsi',
             :limit => 25
         }
     }
