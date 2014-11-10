@@ -36,8 +36,13 @@ module HierarchicalAttributesHelper
     # By default OM returns the _values_ of nodes rather than the nodes themselves, so we have to build the array of nodes manually.
     begin
       collection = []
-      curation_concern.send(attribute_name).count.times do |i|
-        collection << curation_concern.send(attribute_name, i)
+      values = curation_concern.send(attribute_name)
+      if values.kind_of?(Array)
+        curation_concern.send(attribute_name).count.times do |i|
+          collection << curation_concern.send(attribute_name, i)
+        end
+      else
+        collection << values
       end
     end
     collection
