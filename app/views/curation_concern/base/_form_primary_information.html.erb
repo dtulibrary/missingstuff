@@ -1,6 +1,11 @@
 <fieldset class="required primary">
   <%= f.input :title, as: :multi_value %>
 
+  <% hierarchical_attribute_collection(curation_concern, :person).each_with_index do |person, index| %>
+    <%= render partial:"forms/person", locals:{person:person, index:index}  %>
+  <% end %>
+  <%= render partial:"forms/person", locals:{person:nil, index:""}  %>
+
   <%= f.input :person, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' } %>
 
   <%= f.input :description, as: :text, input_html: { rows: '14', type: 'textarea'} %>
