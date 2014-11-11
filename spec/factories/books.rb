@@ -15,7 +15,7 @@ FactoryGirl.define do
       end
     end
     factory :theory_of_moral_sentiments do
-      title ["The Theory of Moral Sentiments"]
+      title "The Theory of Moral Sentiments"
       description "Provides the ethical, philosophical, psychological, and methodological underpinnings to Smith's later works, including The Wealth of Nations (1776), Essays on Philosophical Subjects (1795), and Lectures on Justice, Police, Revenue, and Arms (1763) (first published in 1896)."
       publisher ["A. Kincaid and J. Bell, in Edinburgh"]
       subject ["Morality", "Human nature"]

@@ -16,8 +16,39 @@ li.attribute.hierarchical {
   }
   span.input-group-btn.field-controls {
     background-color: ghostwhite;
-    .add {
+    button.add {
       width: 90px;
     }
   }
+  div {
+      padding-right: 0px;
+  }
+  .field-wrapper {
+      list-style-type: none;
+  }
+}
+
+.listing {
+  span.input-group-btn.field-controls {
+    button.add {
+      width: 90px;
+    }
+    button.remove {
+      width: 90px;
+    }
+  }
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+.form-group ul.listing {
+    max-width: 100%;
+}
+
+div.form-group {
+    margin-right: 0px;
+}
+
+li.field-wrapper {
+    margin-right: 0px;
 }

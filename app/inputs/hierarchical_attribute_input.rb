@@ -6,6 +6,7 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
     input_html_classes.unshift("string")
     input_html_options[:class] << 'multi_value'
     input_html_options[:name] ||= "#{object_name}[#{attribute_name}][]"
+    puts input_html_options.inspect;
 
     populated_field_groups = ""
     collection.each_with_index do |entry,i|
@@ -55,8 +56,8 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
     #group_label =  attribute_name.to_s.humanize
     markup = <<-HTML
       <div class="form-group">
-        <label class="col-sm-4 control-label">#{group_label}</label>
-        <div class="col-sm-8">
+        <label class="col-sm-2 control-label">#{group_label}</label>
+        <div class="col-sm-10">
           #{ build_text_field(value, attribute_name.to_s, options.fetch(:index)) }
         </div>
       </div>

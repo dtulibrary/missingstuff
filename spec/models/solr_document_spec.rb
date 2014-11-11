@@ -11,7 +11,7 @@ describe SolrDocument do
   it "should return complete metadata for OAI harvest" do
     oai_xml = Nokogiri::XML::Document.parse( subject.export_as(:oai_dc_xml) )
     expect( values_at_xpath(oai_xml, "//dc:description").first ).to eq(book.description)
-    expect( values_at_xpath(oai_xml, "//dc:title") ).to eq(book.title)
+    expect( values_at_xpath(oai_xml, "//dc:title").first ).to eq(book.title)
     expect( values_at_xpath(oai_xml, "//dc:subject") ).to eq(book.subject)
   end
 end
