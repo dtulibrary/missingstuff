@@ -4,6 +4,7 @@ class CatalogController < ApplicationController
 
   configure_blacklight do |config|
     config.oai = {
+        :repository_url => 'http://localhost',
         :provider => {
             :repository_name => 'Test',
             :repository_url => 'http://localhost',
@@ -11,7 +12,7 @@ class CatalogController < ApplicationController
             :admin_email => 'root@localhost'
         },
         :document => {
-            :timestamp => 'system_create_dtsi',
+            :timestamp => 'timestamp',
             :limit => 25
         }
     }

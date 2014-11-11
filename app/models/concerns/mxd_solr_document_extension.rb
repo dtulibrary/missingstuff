@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'builder'
 
-# This module provide Dublin Core export based on the document's semantic values
+# This module provides MXD export.  It is a replacement for BlacklightOaiProvider::SolrDocumentExtension
 module MxdSolrDocumentExtension
   include HierarchicalAttributesHelper
 
@@ -12,6 +12,15 @@ module MxdSolrDocumentExtension
 
   def self.register_export_formats(document)
     document.will_export_as(:mxd_xml, "text/xml")
+  end
+
+  def timestamp
+    Time.parse get('timestamp')
+  end
+
+  # The ruby-oai gem provider is hard-coded to call to_oai_dc to generate the xml.  This overrides it to return mxd_xml instead.
+  def to_oai_dc
+    export_as('mxd_xml')
   end
 
   # dublin core elements are mapped against the #dublin_core_field_names whitelist.
