@@ -1,7 +1,9 @@
 # -*- encoding : utf-8 -*-
 require 'builder'
+require 'metadata_format/mxd_format'
+BlacklightOaiProvider::SolrDocumentProvider.register_format(MxdFormat.instance)
 
-# This module provide Dublin Core export based on the document's semantic values
+# This module provides MXD export.  It is a replacement for BlacklightOaiProvider::SolrDocumentExtension
 module MxdSolrDocumentExtension
   include HierarchicalAttributesHelper
 
@@ -12,6 +14,10 @@ module MxdSolrDocumentExtension
 
   def self.register_export_formats(document)
     document.will_export_as(:mxd_xml, "text/xml")
+  end
+
+  def timestamp
+    Time.parse get('timestamp')
   end
 
   # dublin core elements are mapped against the #dublin_core_field_names whitelist.

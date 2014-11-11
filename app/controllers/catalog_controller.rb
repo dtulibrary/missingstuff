@@ -4,14 +4,15 @@ class CatalogController < ApplicationController
 
   configure_blacklight do |config|
     config.oai = {
+        :repository_url => 'http://localhost',
         :provider => {
-            :repository_name => 'Test',
+            :repository_name => "Findit Local",
             :repository_url => 'http://localhost',
             :record_prefix => '',
             :admin_email => 'root@localhost'
         },
         :document => {
-            :timestamp => 'system_create_dtsi',
+            :timestamp => 'timestamp',
             :limit => 25
         }
     }
