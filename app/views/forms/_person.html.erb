@@ -1,0 +1,23 @@
+<% first_name = person ? person.first_name : "" %>
+<% last_name = person ? person.last_name : "" %>
+<% rone = person ? person.role : "" %>
+<li class="field-wrapper hierarchical input-group input-append">
+  <div class="form-group">
+    <label class="col-sm-4 control-label">First Name</label>
+    <div class="col-sm-8">
+      <input aria-labelledby="book_person_<%=index%>_first_name_label" class="string hierarchical_attribute optional multi_value book_person_<%=index%>_first_name form-control text-field" id="book_person_<%=index%>_first_name" name="book[person][][first_name]" type="text" value="<%=first_name%>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">Last Name</label>
+    <div class="col-sm-8">
+      <input aria-labelledby="book_person_<%=index%>_last_name_label" class="string hierarchical_attribute optional multi_value book_person_<%=index%>_last_name form-control text-field" name="book[person][][last_name]" type="text" value="<%=last_name%>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">Role</label>
+    <div class="col-sm-8">
+      <input aria-labelledby="book_person_<%=index%>_role_label" class="string hierarchical_attribute optional multi_value book_person_<%=index%>_role form-control text-field" name="book[person][][role]" type="text" value="<%=role%>">
+    </div>
+  </div>
+</li>
