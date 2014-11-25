@@ -33,11 +33,12 @@ module MxdSolrDocumentExtension
       xml.mxd(:title) {
         xml.mxd(:original,"xml:lang"=>"en") {
           xml.mxd(:main, curation_concern.title.first, "xmlns:xs"=>"http://www.w3.org/2001/XMLSchema", "xsi:type"=>"xs:string")
-          if curation_concern.title.count > 1
-            curation_concern.title[1..curation_concern.title.length].each do |subtitle|
-              xml.mxd(:sub, subtitle)
-            end
-          end
+#         Sub-title handled as separate field in our data... to be fixed
+#         if curation_concern.title.count > 1
+#           curation_concern.title[1..curation_concern.title.length].each do |subtitle|
+#             xml.mxd(:sub, subtitle)
+#           end
+#         end
         }
       }
       hierarchical_attribute_collection(curation_concern, :person).each do |person|
