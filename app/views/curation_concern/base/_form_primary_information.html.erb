@@ -1,9 +1,17 @@
-<fieldset class="required primary">
+<fieldset class="required primary"> 
+
+  <%= f.label :review, 'Review', class: 'col-sm-2 optional control-label multi_value' %>
+  <%= f.collection_radio_buttons :review, [['pr', 'Peer review'] ,['or', 'Other review'], ['nr', 'No review'], ['und', 'Undefined']], :first, :last, {collection_wrapper_tag: 'div', collection_wrapper_class: 'form-group multi_value required', item_wrapper_class: 'col-sm-2'}, {class: 'radio'} %>
+  <br/>
+  <%= f.label :level, 'Level', class: 'col-sm-2 optional control-label multi_value' %>
+  <%= f.collection_radio_buttons :level, [['sci', 'Scientific'] ,['edu', 'Educational'], ['pop', 'Popular'], ['adm', 'Administrative'], ['und', 'Undefined']], :first, :last, {collection_wrapper_tag: 'div', collection_wrapper_class: 'form-group multi_value required', item_wrapper_class: 'col-sm-2'}, {class: 'radio'} %>
+  <br/>
   <%= f.input :title  %>
 
   <%= f.input :subtitle, as: :multi_value %>
 
-  <%= f.input :person, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' } %>
+  <%= f.input :person, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' },
+              input_html: {width: 40, subfields: {role: {type: 'select', options: [['',''],['Author','pau'],['Editor','ped'],['Publisher','ppu'],['Supervisor','sup']]}}} %>
 
   <%= f.input :organisation, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' } %>
 
@@ -14,10 +22,7 @@
   <% end %>
 
   <% if curation_concern.respond_to?(:book) %>
-    <%= f.input :book, as: :hierarchical_attribute %>
+    <%= f.input :book, as: :hierarchical_attribute, input_html: {repeatable: 'false'} %>
   <% end %>
 
-  <%= f.input :publication_date %>
-
-  <%= f.input :requester, as: :multi_value %>
 </fieldset>

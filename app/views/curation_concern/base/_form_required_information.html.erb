@@ -1,8 +1,9 @@
 <fieldset class="required">
   <legend>Required Information</legend>
 
-  <%= f.input :creator, as: :multi_value %>
-
-  <%= f.input :contributor, as: :multi_value, input_html: { class: 'form-control' } %>
+  <%= f.label :lang, 'Language', class: 'select optional control-label' %>
+  <%= f.collection_select :lang, [['Undefined', 'und'], ['English', 'eng'] ,['Danish', 'dan'], ['Swedish', 'swe'], ['Norwegian', 'nor'], ['German', 'ger'],  ['Multiple', 'mul']], :last, :first, {}, {class: 'select optional form-control'} %>
+  <br/>
+  <%= f.input :publication_date, collection: Date.today.year.downto(1960), label:'Publication Year', label_html: {class: ''}, input_html: {class: ''} %>
 
 </fieldset>
