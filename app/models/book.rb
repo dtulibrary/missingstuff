@@ -5,5 +5,5 @@ class Book < ActiveFedora::Base
 
   # Single-value fields
   # Multi-value fields
-  has_attributes :book, datastream: :descMetadata, multiple: false
+  has_attributes :book, datastream: :descMetadata, multiple: true
 end
