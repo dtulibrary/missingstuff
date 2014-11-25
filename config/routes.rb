@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   worthwhile_collections
   worthwhile_curation_concerns
   worthwhile_embargo_management
+  get   '/oai',                                 :to => 'catalog#oai'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
