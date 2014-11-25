@@ -3,7 +3,7 @@ li.attribute.hierarchical {
 
   .label {
     text-align: right;
-    width: 200px;
+    width: 80px;
     float: left;
     margin-top: .25em;
     color: black;
@@ -41,14 +41,24 @@ li.attribute.hierarchical {
   margin-right: 0px;
 }
 
-.form-group ul.listing {
-    max-width: 100%;
-}
-
-div.form-group {
-    margin-right: 0px;
+.form-group {
+    ul.listing {
+        max-width: 100%;
+    }
+//  select {
+//      width: auto;
+//  }
+    input.radio {
+        display: inline;
+        margin-right: 5px;
+    }
 }
 
 li.field-wrapper {
     margin-right: 0px;
+}
+
+label.control-label {
+    padding-left: 0px;
+    margin-bottom: 0px;
 }
