@@ -2,6 +2,7 @@ en:
   simple_form:
     labels:
       subtitle: "Sub-Title"
+      publication_date: "Publication Year"
       person:
         first_name: "First Name"
         last_name: "Last Name"
@@ -11,3 +12,29 @@ en:
         level2: "Level 2"
         level3: "Level 3"
         level4: "Level 4"
+  mapping:
+    lang:
+      und: 'Undefined'
+      eng: 'English'
+      dan: 'Danish'
+      swe: 'Swedish'
+      nor: 'Norwegian'
+      ger: 'German'
+      mul: 'Multiple'
+    review:
+      pr: 'Peer review'
+      or: 'Other review'
+      nr: 'No review'
+      und: 'Undefined'
+    level:
+      sci: 'Scientific'
+      edu: 'Educational'
+      pop: 'Popular'
+      adm: 'Administrative'
+      und: 'Undefined'
+    person:
+      role:
+        pau: 'Author'
+        ped: 'Editor'
+        ppu: 'Publisher'
+        sup: 'Supervisor'
