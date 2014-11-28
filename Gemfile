@@ -48,5 +48,6 @@ group :development, :test do
   gem "jettywrapper"
   gem "factory_girl"
   gem "capybara"
-  gem 'debugger'
+  gem 'debugger' if RUBY_VERSION < 2.0.0
+  gem 'byebug'   if RUBY_VERSION > 2.0.0
 end
