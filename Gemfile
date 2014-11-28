@@ -49,5 +49,5 @@ group :development, :test do
   gem "jettywrapper"
   gem "factory_girl"
   gem "capybara"
-  gem 'debugger'
+  gem 'byebug'
 end
