@@ -16,6 +16,25 @@ GIT
       faraday
       faraday_middleware
 
+GIT
+  remote: git://github.com/curationexperts/worthwhile.git
+  revision: 2e525f66fb2211d90d58bc4de7d1db5a7f3cbd7b
+  ref: 2e525f66fb2211d90d58bc4de7d1db5a7f3cbd7b
+  specs:
+    worthwhile (0.1.1)
+      active_attr
+      breadcrumbs_on_rails (~> 2.3.0)
+      hydra-collections (~> 2.0.5)
+      hydra-head (~> 7.2.2)
+      simple_form (~> 3.1.0.rc2)
+      sufia-models (~> 4.0.0)
+      worthwhile-models (= 0.1.1)
+    worthwhile-models (0.1.1)
+      active_attr
+      hydra-collections (~> 2.0.5)
+      hydra-head (~> 7.2.2)
+      sufia-models (~> 4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -32,7 +51,7 @@ GEM
       activesupport (= 4.1.2.rc1)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    active-fedora (7.1.1)
+    active-fedora (7.1.2)
       active-triples (~> 0.2.2)
       activesupport (>= 3.0.0)
       deprecation
@@ -215,7 +234,7 @@ GEM
     json (1.8.1)
     json-ld (1.1.7)
       rdf (~> 1.1, >= 1.1.4)
-    jwt (1.0.0)
+    jwt (1.2.0)
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -250,8 +269,7 @@ GEM
       foreigner (>= 0.9.1)
       rails (>= 3.2.0)
     mime-types (1.25.1)
-    mini_magick (3.8.1)
-      subexec (~> 0.2.1)
+    mini_magick (4.0.1)
     mini_portile (0.6.0)
     minitest (5.4.2)
     mono_logger (1.1.0)
@@ -327,10 +345,11 @@ GEM
       rdf-xsd (~> 1.1)
     rdf-n3 (1.1.2)
       rdf (~> 1.1, >= 1.1.5)
-    rdf-rdfa (1.1.4.1)
+    rdf-rdfa (1.1.5)
       haml (~> 4.0)
       htmlentities (~> 4.3)
       rdf (~> 1.1, >= 1.1.6)
+      rdf-aggregate-repo
       rdf-xsd (~> 1.1)
     rdf-rdfxml (1.1.3)
       htmlentities (~> 4.3)
@@ -386,7 +405,7 @@ GEM
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.0)
-    rubydora (1.8.0)
+    rubydora (1.8.1)
       activemodel
       activesupport
       deprecation
@@ -410,7 +429,7 @@ GEM
       faraday (>= 0.9.0.rc5)
       jwt (>= 0.1.5)
       multi_json (>= 1.0.0)
-    simple_form (3.1.0.rc2)
+    simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
     sinatra (1.4.5)
@@ -446,7 +465,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.10)
     stomp (1.3.3)
-    subexec (0.2.3)
     sufia-models (4.0.1)
       activerecord-import (~> 0.5)
       activeresource (~> 4.0)
@@ -478,7 +496,7 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uber (0.0.10)
+    uber (0.0.11)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -487,19 +505,6 @@ GEM
       rack (>= 1.0.0)
     warden (1.2.3)
       rack (>= 1.0)
-    worthwhile (0.1.2)
-      active_attr
-      breadcrumbs_on_rails (~> 2.3.0)
-      hydra-collections (~> 2.0.5)
-      hydra-head (~> 7.2.2)
-      simple_form (~> 3.1.0.rc2)
-      sufia-models (~> 4.0.0)
-      worthwhile-models (= 0.1.2)
-    worthwhile-models (0.1.2)
-      active_attr
-      hydra-collections (~> 2.0.5)
-      hydra-head (~> 7.2.2)
-      sufia-models (~> 4.0.0)
     xml-simple (1.1.4)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -530,4 +535,4 @@ DEPENDENCIES
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)
-  worthwhile
+  worthwhile!
