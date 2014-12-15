@@ -4,9 +4,10 @@ gem 'worthwhile', github:'curationexperts/worthwhile', ref:'2e525f66fb2211d90d58
 gem 'capistrano', '~> 2.15.5', group: :development
 gem 'blacklight_oai_provider' , github:'cbeer/blacklight_oai_provider'
 gem 'oai' , github:'code4lib/ruby-oai'
+gem 'dtu_rails_common', :github => 'dtulibrary/dtu_rails_common'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.2.rc1'
+gem 'rails', '4.1.8'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: [:development, :test]
 gem 'pg'
@@ -22,7 +23,7 @@ gem 'therubyracer',  platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
