@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//# require turbolinks
+//= require dtu_rails_common
 //
 // Required by Blacklight
 //= require blacklight/blacklight
