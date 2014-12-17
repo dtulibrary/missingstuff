@@ -13,7 +13,8 @@
   <%= f.input :person, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' },
               input_html: {width: 40, subfields: {role: {type: 'select', options: [['',''],['Author','pau'],['Editor','ped'],['Publisher','ppu'],['Supervisor','sup']]}}} %>
 
-  <%= f.input :organisation, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' } %>
+  <%= f.input :organisation, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' },
+              input_html: {width: 40, subfields: {role: {type: 'select', options: [['',''],['Corporate author','oau'],['Affiliation','oaf'],['Publisher','opu']]}}} %>
 
   <%= f.input :description, as: :text, input_html: { rows: '14', type: 'textarea'} %>
 
@@ -21,7 +22,10 @@
     <%= f.input :event, as: :hierarchical_attribute %>
   <% end %>
 
-  <% if curation_concern.respond_to?(:book) %>
+  <% if curation_concern.class == Book %>
+    <%= f.input :book, as: :hierarchical_attribute, input_html: {repeatable: 'false', subfields: {book_title: {role: 'text', skip: true}}} %>
+  <% end %>
+  <% if curation_concern.class == BookChapter %>
     <%= f.input :book, as: :hierarchical_attribute, input_html: {repeatable: 'false'} %>
   <% end %>
 

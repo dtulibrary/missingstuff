@@ -3,3 +3,30 @@
         font-size: 12px;
     }
 }     
+#header-navbar-static-top .level2-navbar .container {
+    div.container {
+        height: 109px;
+    }
+    a.findit-logo {
+        margin-top: 35px;
+        line-height: 100%;
+        height: 109px;
+    }
+}
+.findit-sub-logo {
+    font-size: 24px;
+    line-height: 100%;
+}
+div.pull-right {
+    div.btn-group {
+        .btn {
+            line-height: 100%;
+        }
+    }
+}
+div.top-search {
+    margin-top: 60px;
+}
+html body {
+    padding: 0px;
+}

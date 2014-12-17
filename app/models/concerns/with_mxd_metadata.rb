@@ -32,7 +32,9 @@ module WithMxdMetadata
         values.each_with_index do |field, index|
           unless subfields_empty?(field, subs)
             subs.each do |sub|
-              self.send(attribute,index).send("#{sub}=".to_sym,field.fetch(sub))
+              if field.key? sub
+                self.send(attribute,index).send("#{sub}=".to_sym,field.fetch(sub))
+              end
             end
           end
         end
@@ -59,8 +61,10 @@ module WithMxdMetadata
 
   def subfields_empty?(new_values, subs)
     subs.each do |sub|
-      value = new_values.fetch(sub)
-      return false unless value.nil? || value.empty?
+      if new_values.key? sub
+        value = new_values.fetch(sub)
+        return false unless value.nil? || value.empty?
+      end
     end
     return true
   end

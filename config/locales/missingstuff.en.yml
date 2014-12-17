@@ -1,4 +1,6 @@
 en:
+  dtu:
+    application_name: 'DTU FindIt Local Publications'
   simple_form:
     labels:
       subtitle: "Sub-Title"
@@ -12,6 +14,8 @@ en:
         level2: "Level 2"
         level3: "Level 3"
         level4: "Level 4"
+      book:
+        book_title: "Title"
   mapping:
     lang:
       und: 'Undefined'
@@ -38,3 +42,8 @@ en:
         ped: 'Editor'
         ppu: 'Publisher'
         sup: 'Supervisor'
+    organisation:
+      role:
+        oau: 'Corporate author'
+        oaf: 'Affiliation'
+        opu: 'Publisher'

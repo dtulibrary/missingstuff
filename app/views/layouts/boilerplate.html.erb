@@ -1,0 +1,33 @@
+<% content_for :head do %>
+    <!-- this goes into /html/head -->
+    <%#= render :partial => 'shared/head' %>
+<% end %>
+<% content_for :menu do %>
+  <!-- this goes into the top right corner of the application. Useful for application menus and login/logout -->
+  <%= render 'shared/site_actions' if show_site_actions? %>
+<% end %>
+<% content_for :logo do %>
+  <!-- this goes into the left part on the "fat" header -->
+  <%= link_to 'DTU Find<span class="dtu-red">it</span><div class="findit-sub-logo">Local Publications</div>'.html_safe, root_path, :class => 'findit-logo visible-desktop pull-left' %>
+<% end %>
+<% content_for :masthead do %>
+  <!-- this goes into the center part (to the right of the :logo) of the fat header -->
+  <div class="top-search">
+    <%= render 'shared/site_search' if show_site_search? %>
+  </div>
+<% end %>
+<% content_for :modal do %>
+  <!-- this is a place to define modals and other hidden stuff that is needed by the application -->
+  <%= render 'shared/flash_message' %>
+  <div id="main" role="main" class="container <%= yield(:page_class) if content_for?(:page_class)%>">
+  <% if content_for?(:page_header) %>
+    <div class="row">
+      <div class="col-md-12 main-header ">
+        <%= yield(:page_header) %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+<% end %>
+<%= render template: "layouts/dtu" %>
+

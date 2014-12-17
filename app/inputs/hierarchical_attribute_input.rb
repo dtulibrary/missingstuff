@@ -51,7 +51,9 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
       else
         value = entry.send(subfield_name).first
       end
-      markup << build_form_group(subfields, value, subfield_name, index:index, label: subfield_label(attribute_name, subfield_name))
+      if ! subfields[subfield_name] || ! subfields[subfield_name][:skip]
+        markup << build_form_group(subfields, value, subfield_name, index:index, label: subfield_label(attribute_name, subfield_name))
+       end
     end
     markup
   end

@@ -32,6 +32,7 @@ class MxdDatastream < ActiveFedora::OmDatastream
         t.place
     }
     t.book {
+        t.book_title
         t.publisher
         t.edition
         t.isbn

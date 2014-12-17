@@ -6,7 +6,7 @@
   <tbody>
   <%= curation_concern_attribute_to_html(curation_concern, :subtitle, 'Sub-title', { catalog_search_link: true }) %>
   <%= hierarchical_attribute_to_html(curation_concern, :person, 'People', { catalog_search_link: true, localize: {:role => true} }) %>
-  <%= hierarchical_attribute_to_html(curation_concern, :organisation, 'Organisation', { catalog_search_link: true }) %>
+  <%= hierarchical_attribute_to_html(curation_concern, :organisation, 'Organisation', { catalog_search_link: true, localize: {:role => true} }) %>
   <%= curation_concern_attribute_to_html(curation_concern, :description, 'Abstract') %>
   <%= curation_concern_attribute_to_html(curation_concern, :keyword, 'Keyword') %>
   <%= hierarchical_attribute_to_html(curation_concern, :book, 'Book', { catalog_search_link: true }) %>
