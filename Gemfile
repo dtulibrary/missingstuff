@@ -1,11 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'hydra-derivatives', github:"projecthydra-labs/hydra-derivatives" , branch:'fedora-4'
-gem 'hydra-collections', github:"projecthydra-labs/hydra-collections" , branch:'fedora-4'
-gem 'hydra-head', github:"projecthydra/hydra-head" , branch:'fedora-4'
-gem 'sufia', github:"projecthydra/sufia" , branch:'fedora-4/master'
+gem 'hydra-head', github:"projecthydra/hydra-head", branch:'master'
+gem 'active-fedora', github:"projecthydra/active_fedora", branch:'master'
 gem 'worthwhile', github:'flyingzumwalt/worthwhile', branch:'fedora-4'
-# gem 'worthwhile', github:'curationexperts/worthwhile', ref:'2e525f66fb2211d90d58bc4de7d1db5a7f3cbd7b'
+
 gem 'capistrano', '~> 2.15.5', group: :development
 gem 'blacklight_oai_provider' , github:'cbeer/blacklight_oai_provider'
 gem 'oai' , github:'code4lib/ruby-oai'

@@ -1,7 +1,7 @@
 class MxdDatastream < ActiveFedora::OmDatastream
 
-  def prefix
-    "desc_metadata__"
+  def prefix(ds_name)
+    ""
   end
 
   set_terminology do |t|

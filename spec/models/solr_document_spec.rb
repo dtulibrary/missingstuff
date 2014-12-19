@@ -13,5 +13,6 @@ describe SolrDocument do
     expect( values_at_xpath(oai_xml, "//dc:description").first ).to eq(book.description)
     expect( values_at_xpath(oai_xml, "//dc:title").first ).to eq(book.title)
     expect( values_at_xpath(oai_xml, "//dc:subject") ).to eq(book.subject)
+    expect( values_at_xpath(oai_xml, "//dc:publisher") ).to eq(book.publisher)
   end
 end

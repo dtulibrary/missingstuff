@@ -23,13 +23,13 @@ class SolrDocument
   use_extension(MxdSolrDocumentExtension) # Using this instead of BlacklightOaiProvider::SolrDocumentExtension
 
   field_semantics.merge!(
-      title: "desc_metadata__title_tesim",
-      description: "desc_metadata__description_tesim",
-      creator: "desc_metadata__creator_tesim",
-      publisher: "desc_metadata__publisher_tesim",
-      language: "desc_metadata__language_tesim",
-      subject: "misc_metadata__subject_tesim",
-      format: "desc_metadata__format_tesim"
+      title: "title_tesim",
+      description: "description_tesim",
+      creator: "creator_tesim",
+      publisher: "publisher_tesim",
+      language: "language_tesim",
+      subject: "subject_tesim",
+      format: "format_tesim"
   )
 
 end
