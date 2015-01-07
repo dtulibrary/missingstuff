@@ -31,7 +31,7 @@ GIT
 GIT
   remote: git://github.com/projecthydra-labs/worthwhile.git
   revision: 92221695093474702c05699a36373f576d31f8bb
-  branch: 92221695093474702c05699a36373f576d31f8bb
+  ref: 92221695093474702c05699a36373f576d31f8bb
   specs:
     worthwhile (0.1.1)
       active_attr
@@ -49,10 +49,10 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/active_fedora.git
-  revision: 6c1d50518086c9fe4fe97be994131fa82579ff6a
+  revision: b5d7ca35e34f1baa03fb4b0600af002f83c31286
   branch: master
   specs:
-    active-fedora (9.0.0.beta7)
+    active-fedora (9.0.0.beta8)
       active-triples (~> 0.5.0)
       activesupport (>= 4.1.0)
       deprecation
@@ -66,24 +66,24 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/hydra-head.git
-  revision: 94ddf6911fbf48236e2cd7cb201ac646d9a020c0
+  revision: 95dfd1bd7acbf3b8a8f09929ae03540b5f789c0a
   branch: master
   specs:
-    hydra-access-controls (9.0.0.beta1)
+    hydra-access-controls (9.0.0.beta2)
       active-fedora (~> 9.0.0.beta3)
       activesupport
       blacklight (~> 5.3)
       cancancan
       deprecation
       sass-rails
-    hydra-core (9.0.0.beta1)
+    hydra-core (9.0.0.beta2)
       block_helpers
-      hydra-access-controls (= 9.0.0.beta1)
+      hydra-access-controls (= 9.0.0.beta2)
       jettywrapper (>= 1.4.1)
       rails (>= 3.2.3, < 5)
-    hydra-head (9.0.0.beta1)
-      hydra-access-controls (= 9.0.0.beta1)
-      hydra-core (= 9.0.0.beta1)
+    hydra-head (9.0.0.beta2)
+      hydra-access-controls (= 9.0.0.beta2)
+      hydra-core (= 9.0.0.beta2)
       rails (>= 3.2.6)
 
 GEM
@@ -138,7 +138,7 @@ GEM
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
     bcrypt (3.1.9)
-    blacklight (5.8.1)
+    blacklight (5.8.2)
       bootstrap-sass (~> 3.2)
       deprecation
       kaminari (~> 0.13)
@@ -230,7 +230,7 @@ GEM
     hashie (3.3.2)
     highline (1.6.21)
     hike (1.2.3)
-    htmlentities (4.3.2)
+    htmlentities (4.3.3)
     http_logger (0.5.1)
     hydra-collections (4.0.0.beta4)
       blacklight
@@ -245,7 +245,7 @@ GEM
       mini_magick
     hydra-file_characterization (0.3.1)
       activesupport (>= 3.0.0)
-    i18n (0.6.11)
+    i18n (0.7.0)
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -302,7 +302,7 @@ GEM
       rails (>= 3.2.0)
     mime-types (2.4.3)
     mini_magick (4.0.1)
-    mini_portile (0.6.1)
+    mini_portile (0.6.2)
     minitest (5.5.0)
     mono_logger (1.1.0)
     multi_json (1.10.1)
