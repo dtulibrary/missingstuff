@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'hydra-head', github:"projecthydra/hydra-head", branch:'master'
 gem 'active-fedora', github:"projecthydra/active_fedora", branch:'master'
-gem 'worthwhile', github:'flyingzumwalt/worthwhile', branch:'fedora-4'
+gem 'worthwhile', github:'projecthydra-labs/worthwhile', branch:'92221695093474702c05699a36373f576d31f8bb'
 
 gem 'capistrano', '~> 2.15.5', group: :development
 gem 'blacklight_oai_provider' , github:'cbeer/blacklight_oai_provider'
