@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'hydra-head', github:"projecthydra/hydra-head", branch:'master'
-gem 'active-fedora', github:"projecthydra/active_fedora", branch:'master'
+gem 'hydra-head', github:"projecthydra/hydra-head", :tag => 'v9.0.0.rc2'
+gem 'active-fedora', github:"projecthydra/active_fedora", :tag => 'v9.0.0.rc2'
 gem 'worthwhile', github:'projecthydra-labs/worthwhile', ref:'92221695093474702c05699a36373f576d31f8bb'
 
 gem 'capistrano', '~> 2.15.5', group: :development

@@ -49,10 +49,10 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/active_fedora.git
-  revision: b5d7ca35e34f1baa03fb4b0600af002f83c31286
-  branch: master
+  revision: 9d7317d5596d896782952a8f0011b7ed3bb35d6a
+  tag: v9.0.0.rc2
   specs:
-    active-fedora (9.0.0.beta8)
+    active-fedora (9.0.0.rc2)
       active-triples (~> 0.5.0)
       activesupport (>= 4.1.0)
       deprecation
@@ -66,24 +66,24 @@ GIT
 
 GIT
   remote: git://github.com/projecthydra/hydra-head.git
-  revision: 95dfd1bd7acbf3b8a8f09929ae03540b5f789c0a
-  branch: master
+  revision: 538de7f51c1fa78b6659b82ff92c2e696d167f89
+  tag: v9.0.0.rc2
   specs:
-    hydra-access-controls (9.0.0.beta2)
-      active-fedora (~> 9.0.0.beta3)
+    hydra-access-controls (9.0.0.rc2)
+      active-fedora (~> 9.0.0.rc2)
       activesupport
       blacklight (~> 5.3)
       cancancan
       deprecation
       sass-rails
-    hydra-core (9.0.0.beta2)
+    hydra-core (9.0.0.rc2)
       block_helpers
-      hydra-access-controls (= 9.0.0.beta2)
+      hydra-access-controls (= 9.0.0.rc2)
       jettywrapper (>= 1.4.1)
       rails (>= 3.2.3, < 5)
-    hydra-head (9.0.0.beta2)
-      hydra-access-controls (= 9.0.0.beta2)
-      hydra-core (= 9.0.0.beta2)
+    hydra-head (9.0.0.rc2)
+      hydra-access-controls (= 9.0.0.rc2)
+      hydra-core (= 9.0.0.rc2)
       rails (>= 3.2.6)
 
 GEM
@@ -155,7 +155,7 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
-    cancancan (1.9.2)
+    cancancan (1.10.0)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
