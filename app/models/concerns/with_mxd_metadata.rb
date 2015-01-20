@@ -23,24 +23,28 @@ module WithMxdMetadata
   # If update_people is not defined, the :person values will be ignored.
   # All regular attributes are handled with default update_attributes behavior.
   def attributes=(attributes)
-    filtered_attributes = attributes.dup
-    WithMxdMetadata.special_attributes.each do |attribute|
-      subs = subfields_for(attribute)
-      values = filtered_attributes.delete(attribute)
-      unless values.nil?
-        self.send("#{attribute}=".to_sym, nil)
-        values.each_with_index do |field, index|
-          unless subfields_empty?(field, subs)
-            subs.each do |sub|
-              if field.key? sub
-                self.send(attribute,index).send("#{sub}=".to_sym,field.fetch(sub))
+    if descMetadata.class == MxdDatastream
+      filtered_attributes = attributes.dup
+      WithMxdMetadata.special_attributes.each do |attribute|
+        subs = subfields_for(attribute)
+        values = filtered_attributes.delete(attribute)
+        unless values.nil?
+          self.send("#{attribute}=".to_sym, nil)
+          values.each_with_index do |field, index|
+            unless subfields_empty?(field, subs)
+              subs.each do |sub|
+                if field.key? sub
+                  self.send(attribute,index).send("#{sub}=".to_sym,field.fetch(sub))
+                end
               end
             end
           end
         end
       end
+      super(filtered_attributes)
+    else
+      super(attributes)
     end
-    super(filtered_attributes)
   end
 
   # Lists the term names for the subfields of the attribute identified by attribute_name
