@@ -10,6 +10,7 @@
   <%= curation_concern_attribute_to_html(curation_concern, :description, 'Abstract') %>
   <%= curation_concern_attribute_to_html(curation_concern, :keyword, 'Keyword') %>
   <%= hierarchical_attribute_to_html(curation_concern, :book, 'Book', { catalog_search_link: true }) %>
+  <%= hierarchical_attribute_to_html(curation_concern, :event, 'Event', { catalog_search_link: true }) %>
   <%= curation_concern_attribute_to_html(curation_concern, :contributor, 'Contributors', { catalog_search_link: true }) %>
   <%= curation_concern_attribute_to_html(curation_concern, :subject, "Subject", { catalog_search_link: true }) %>
   <%= curation_concern_attribute_to_html(curation_concern, :publisher, "Publisher") %>

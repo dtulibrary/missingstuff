@@ -18,8 +18,8 @@
 
   <%= f.input :description, as: :text, input_html: { rows: '14', type: 'textarea'} %>
 
-  <% if curation_concern.respond_to?(:lecture_note) %>
-    <%= f.input :event, as: :hierarchical_attribute %>
+  <% if curation_concern.class == LectureNote %>
+    <%= f.input :event, as: :hierarchical_attribute, input_html: {repeatable: 'false'} %>
   <% end %>
 
   <% if curation_concern.class == Book %>
