@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   worthwhile_curation_concerns
   worthwhile_embargo_management
   get   '/oai',                                 :to => 'catalog#oai'
+
+  get   '/login',                   :to => 'sessions#new', :as => 'new_session'
+  get   '/auth/:provider/callback', :to => 'sessions#create',  :as => 'create_session'
+  get   '/auth/:provider/setup',    :to => 'sessions#setup',   :as => 'setup_session'
+  get   '/logout',                  :to => 'sessions#destroy', :as => 'destroy_session'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

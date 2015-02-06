@@ -1,0 +1,7 @@
+<% if current_user %>
+  <%= render 'shared/add_content' %>
+  <%= render 'shared/my_actions' %>
+<% else %>
+  <%= link_to 'Log In', { controller: "sessions", action: 'new', only_dtu: 'true' }, class: 'btn btn-primary login', role: 'menuitem' %>
+<% end %>
+
