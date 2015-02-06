@@ -6,6 +6,6 @@ class {'apache2':
 
 class {'missingstuff':
   rails_env  => 'unstable',
-  conf_set   => 'vagrant',
+  conf_set   => 'vagrant-jessie',
   vhost_name => 'missingstuff.vagrant.vm',
 }
