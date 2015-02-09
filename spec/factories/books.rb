@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :book do
     # Sets depositor metadata (required)
-    ignore do
+    transient do
       user { FactoryGirl.create(:user) }
     end
     before(:create) do |work, evaluator|

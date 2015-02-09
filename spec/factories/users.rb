@@ -1,15 +1,12 @@
 FactoryGirl.define do
   factory :user do
     sequence(:email) {|n| "email-#{srand}@test.com" }
-    password 'a password'
-    password_confirmation 'a password'
     factory :admin do
       after(:build) do |user|
         def user.groups
-          ["admin"]
+          ["admin", "catalog"]
         end
       end
     end
   end
-
 end
