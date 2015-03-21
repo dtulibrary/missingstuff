@@ -62,3 +62,19 @@ label.control-label {
     padding-left: 0px;
     margin-bottom: 0px;
 }
+
+label.inline-label {
+    text-align: right;
+    padding-right: 2px;
+}
+div.inline-input {
+    padding-left: 0px;
+}
+label.hierarchical_attribute {
+    font-size: 16px;
+}
+fieldset {
+    div.form-group {
+        border: 1px;
+    }
+}

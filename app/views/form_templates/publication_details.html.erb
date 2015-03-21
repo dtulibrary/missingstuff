@@ -1,0 +1,27 @@
+<div class="form-group">
+    <label class="col-sm-1 control-label">No. pages</label>
+    <div class="col-sm-1 input">
+	<%= values[:pages] %>
+    </div>
+    <% if record_type=='BookChapter' %>
+        <label class="col-sm-1 inline-label">Pages&nbsp;range</label>
+        <div class="col-sm-1 inline-input">
+            <%= values[:page_range] %>
+        </div>
+        <label class="col-sm-1 inline-label">Chapter</label>
+        <div class="col-sm-1 inline-input">
+            <%= values[:chapter] %>
+        </div>
+        <label class="col-sm-1 inline-label">DOI</label>
+        <div class="col-sm-2 inline-input">
+            <%= values[:doi] %>
+        </div>
+        <label class="col-sm-1 inline-label">Article no.</label>
+        <div class="col-sm-2 inline-input">
+            <%= values[:article_number] %>
+        </div>
+    <% end %>
+</div>
+<script>
+    $('#book_chapter_details_page_range').attr('placeholder', 'from-to');
+</script>
