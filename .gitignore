@@ -32,3 +32,8 @@ coverage
 public/assets
 
 .project
+/arch/
+/.rbenv-version
+/.ruby-version
+/.ffignore
+
