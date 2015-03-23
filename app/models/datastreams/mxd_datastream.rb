@@ -63,6 +63,14 @@ class MxdDatastream < ActiveFedora::OmDatastream
         t.eissn
         t.publisher
     }
+    t.computer_program {
+        t.version
+        t.size
+        t.output_media
+        t.doi
+        t.publisher
+        t.city
+    }
     t.requester
     t.publication_date(index_as: [:stored_searchable, :facetable])
     t.mxd_type(path:"type", index_as: [:stored_searchable, :facetable])

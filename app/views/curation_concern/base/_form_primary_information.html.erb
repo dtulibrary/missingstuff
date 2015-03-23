@@ -17,18 +17,23 @@
 
   <%= f.input :description, as: :text, input_html: { rows: '14', type: 'textarea'} %>
 
-  <%= f.input :details, as: :hierarchical_attribute, label: 'Publication details', input_html: {repeatable: 'false', template: 'publication_details', record_type: curation_concern.class} %>
+  <% if curation_concern.class != ComputerProgram %>
+    <%= f.input :details, as: :hierarchical_attribute, label: 'Publication details',
+                input_html: {repeatable: 'false', template: 'publication_details', record_type: curation_concern.class} %>
+  <% end %>
   <% if curation_concern.class == LectureNote %>
     <%= f.input :book, as: :hierarchical_attribute, label: false, input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
   <% end %>
 
   <% if curation_concern.class == BookChapter %>
     <br/>
-    <%= f.input :book, as: :hierarchical_attribute, label: 'Book information', input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
+    <%= f.input :book, as: :hierarchical_attribute, label: 'Book information',
+                input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
   <% end %>
   <% if curation_concern.class == ReportChapter %>
     <br/>
-    <%= f.input :book, as: :hierarchical_attribute, label: 'Report information', input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
+    <%= f.input :book, as: :hierarchical_attribute, label: 'Report information',
+                input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
   <% end %>
   <% if curation_concern.class == Book or curation_concern.class == Report %>
     <%= f.input :book, as: :hierarchical_attribute, label: false, input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
@@ -37,14 +42,19 @@
     <br/>
     <%= f.input :series, as: :hierarchical_attribute, label: 'Journal information', input_html: {repeatable: 'false', template: 'series'} %>
   <% else %>
-    <%= f.input :series, as: :hierarchical_attribute, label: 'Series information', input_html: {repeatable: 'false', template: 'series'} %>
+    <% if curation_concern.class != ComputerProgram %>
+      <%= f.input :series, as: :hierarchical_attribute, label: 'Series information', input_html: {repeatable: 'false', template: 'series'} %>
+    <% end %>
+  <% end %>
+  <% if curation_concern.class == ComputerProgram %>
+    <%= f.input :computer_program, as: :hierarchical_attribute, label: false, input_html: {repeatable: 'false', template: 'computer_program'} %>
   <% end %>
   <div class="col-sm-6">
     <%= f.label :lang, 'Language', class: 'select optional control-label' %>
-    <%= f.collection_select :lang, [['Undefined', 'und'], ['English', 'eng'] ,['Danish', 'dan'], ['Swedish', 'swe'], ['Norwegian', 'nor'], ['German', 'ger'],  ['Multiple', 'mul']], :last, :first, {}, {class: 'select optional form-control'} %>
+    <%= f.collection_select :lang, [['Undefined', 'und'], ['English', 'eng'] ,['Danish', 'dan'], ['Swedish', 'swe'], ['Norwegian', 'nor'],
+                                    ['German', 'ger'],  ['Multiple', 'mul']], :last, :first, {}, {class: 'select optional form-control'} %>
   </div>
   <div class="col-sm-6">
     <%= f.input :requester, as: :multi_value, label: 'Requester e-mail' %>
   </div>
-
 </fieldset>
