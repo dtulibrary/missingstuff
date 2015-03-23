@@ -14,7 +14,7 @@ module WithMxdMetadata
 
   # Attributes that require special handling on updates
   def self.special_attributes
-    [:person, :organisation, :event, :book, :details, :series]
+    [:person, :editor, :organisation, :event, :book, :details, :series, :computer_program]
   end
 
   # Overrides attributes=
