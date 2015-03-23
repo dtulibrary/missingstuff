@@ -39,6 +39,7 @@ class MxdDatastream < ActiveFedora::OmDatastream
         t.pages
         t.doi
         t.article_number
+        t.report_number
     }
     t.book {
         t.book_title

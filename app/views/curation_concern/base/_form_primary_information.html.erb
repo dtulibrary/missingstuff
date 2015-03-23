@@ -26,10 +26,19 @@
     <br/>
     <%= f.input :book, as: :hierarchical_attribute, label: 'Book information', input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
   <% end %>
-  <% if curation_concern.class == Book %>
+  <% if curation_concern.class == ReportChapter %>
+    <br/>
+    <%= f.input :book, as: :hierarchical_attribute, label: 'Report information', input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
+  <% end %>
+  <% if curation_concern.class == Book or curation_concern.class == Report %>
     <%= f.input :book, as: :hierarchical_attribute, label: false, input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
   <% end %>
-  <%= f.input :series, as: :hierarchical_attribute, label: 'Series information', input_html: {repeatable: 'false', template: 'series'} %>
+  <% if curation_concern.class == JournalArticle %>
+    <br/>
+    <%= f.input :series, as: :hierarchical_attribute, label: 'Journal information', input_html: {repeatable: 'false', template: 'series'} %>
+  <% else %>
+    <%= f.input :series, as: :hierarchical_attribute, label: 'Series information', input_html: {repeatable: 'false', template: 'series'} %>
+  <% end %>
   <div class="col-sm-6">
     <%= f.label :lang, 'Language', class: 'select optional control-label' %>
     <%= f.collection_select :lang, [['Undefined', 'und'], ['English', 'eng'] ,['Danish', 'dan'], ['Swedish', 'swe'], ['Norwegian', 'nor'], ['German', 'ger'],  ['Multiple', 'mul']], :last, :first, {}, {class: 'select optional form-control'} %>

@@ -3,8 +3,8 @@
     <div class="col-sm-1 input">
 	<%= values[:pages] %>
     </div>
-    <% if record_type=='BookChapter' %>
-        <label class="col-sm-1 inline-label">Pages&nbsp;range</label>
+    <% if record_type==BookChapter or record_type==ReportChapter %>
+        <label class="col-sm-1 inline-label">Pages</label>
         <div class="col-sm-1 inline-input">
             <%= values[:page_range] %>
         </div>
@@ -21,7 +21,28 @@
             <%= values[:article_number] %>
         </div>
     <% end %>
+    <% if record_type==JournalArticle %>
+        <label class="col-sm-1 inline-label">Pages</label>
+        <div class="col-sm-1 inline-input">
+            <%= values[:page_range] %>
+        </div>
+        <label class="col-sm-1 inline-label">DOI</label>
+        <div class="col-sm-2 inline-input">
+            <%= values[:doi] %>
+        </div>
+        <label class="col-sm-1 inline-label">Article no.</label>
+        <div class="col-sm-2 inline-input">
+            <%= values[:article_number] %>
+        </div>
+    <% end %>
+    <% if record_type==Report %>
+        <label class="col-sm-1 inline-label">Report no.</label>
+        <div class="col-sm-1 inline-input">
+            <%= values[:report_number] %>
+        </div>
+    <% end %>
 </div>
 <script>
     $('#book_chapter_details_page_range').attr('placeholder', 'from-to');
+    $('#journal_article_details_page_range').attr('placeholder', 'from-to');
 </script>
