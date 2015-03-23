@@ -13,12 +13,12 @@ describe WithMxdMetadata do
   subject { ClassWithMxdMetadata.new({publication_date:"1929",person:[{first_name:"Nella", last_name:"Larsen", role:"author"}]}) }
 
   it "should track special attributes" do
-    expect(WithMxdMetadata.special_attributes).to eq [:person, :organisation, :event, :book]
+    expect(WithMxdMetadata.special_attributes).to eq [:person, :organisation, :event, :book, :details, :series]
   end
 
   describe "#subfields_for" do
     it "should report the subfields for the specified term" do
-      expect(subject.subfields_for(:person)).to eq([:first_name, :last_name, :role])
+      expect(subject.subfields_for(:person)).to eq([:person_id_type, :person_id, :first_name, :last_name, :role, :affiliation])
     end
   end
 
