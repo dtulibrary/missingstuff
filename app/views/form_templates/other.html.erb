@@ -1,0 +1,21 @@
+<div class="form-group">
+    <label class="col-sm-2 control-label">Type of contribution</label>
+    <div class="col-sm-2 input">
+	<%= values[:type] %>
+    </div>
+    <label class="col-sm-2 inline-label">Last modified</label>
+    <div class="col-sm-2 inline-input">
+	<%= values[:date_modified] %>
+    </div>
+    <label class="col-sm-2 inline-label">Last accessed</label>
+    <div class="col-sm-2 inline-input">
+	<%= values[:date_accessed] %>
+    </div>
+</div>
+<div class="form-group">
+    note: for internet publications, use the last modified date, for we pages used the last accessed date
+</div>
+<script>
+    $('#other_date_modified').attr('placeholder', 'YYYY-MM-DD');
+    $('#other_date_accessed').attr('placeholder', 'YYYY-MM-DD');
+</script>

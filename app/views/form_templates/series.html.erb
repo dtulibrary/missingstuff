@@ -1,31 +1,52 @@
 <div class="form-group">
     <label class="col-sm-1 control-label">Title</label>
     <div class="col-sm-11 input">
-	<%= values[:series_title] %>
+        <%= values[:series_title] %>
     </div>
 </div>
-<div class="form-group">
-    <label class="col-sm-1 control-label">Year</label>
-    <div class="col-sm-1 input">
-	<%= values[:year] %>
+<% if record_type == JournalArticle %>
+    <div class="form-group">
+        <label class="col-sm-1 control-label">Year</label>
+        <div class="col-sm-1 input">
+            <%= values[:year] %>
+        </div>
+        <label class="col-sm-1 inline-label">Vol.</label>
+        <div class="col-sm-1 inline-input">
+            <%= values[:volume] %>
+        </div>
+        <label class="col-sm-1 inline-label">No.</label>
+        <div class="col-sm-1 inline-input">
+            <%= values[:number] %>
+        </div>
+        <label class="col-sm-1 inline-label">ISSN</label>
+        <div class="col-sm-2 inline-input">
+            <%= values[:issn] %>
+        </div>
+        <label class="col-sm-1 inline-label">e-ISSN</label>
+        <div class="col-sm-2 inline-input">
+            <%= values[:eissn] %>
+        </div>
     </div>
-    <label class="col-sm-1 inline-label">Vol.</label>
-    <div class="col-sm-1 inline-input">
-	<%= values[:volume] %>
+<% else %>
+    <div class="form-group">
+        <label class="col-sm-1 control-label">Volume</label>
+        <div class="col-sm-1 input">
+            <%= values[:volume] %>
+        </div>
+        <label class="col-sm-1 inline-label">No.</label>
+        <div class="col-sm-1 inline-input">
+            <%= values[:number] %>
+        </div>
+        <label class="col-sm-1 inline-label">ISSN</label>
+        <div class="col-sm-3 inline-input">
+            <%= values[:issn] %>
+        </div>
+        <label class="col-sm-1 inline-label">e-ISSN</label>
+        <div class="col-sm-3 inline-input">
+            <%= values[:eissn] %>
+        </div>
     </div>
-    <label class="col-sm-1 inline-label">No.</label>
-    <div class="col-sm-1 inline-input">
-	<%= values[:number] %>
-    </div>
-    <label class="col-sm-1 inline-label">ISSN</label>
-    <div class="col-sm-2 inline-input">
-	<%= values[:issn] %>
-    </div>
-    <label class="col-sm-1 inline-label">e-ISSN</label>
-    <div class="col-sm-2 inline-input">
-	<%= values[:eissn] %>
-    </div>
-</div>
+<% end %>
 <div class="form-group">
     <label class="col-sm-1 control-label">Publisher</label>
     <div class="col-sm-7 input">

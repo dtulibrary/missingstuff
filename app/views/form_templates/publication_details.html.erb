@@ -3,7 +3,7 @@
     <div class="col-sm-1 input">
 	<%= values[:pages] %>
     </div>
-    <% if record_type==BookChapter or record_type==ReportChapter %>
+    <% if record_type==BookChapter or record_type==ReportChapter or record_type==Other %>
         <label class="col-sm-1 inline-label">Pages</label>
         <div class="col-sm-1 inline-input">
             <%= values[:page_range] %>

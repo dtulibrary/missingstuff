@@ -64,6 +64,7 @@ class MxdDatastream < ActiveFedora::OmDatastream
         t.publisher
     }
     t.computer_program {
+        t.year
         t.version
         t.size
         t.output_media
@@ -72,6 +73,8 @@ class MxdDatastream < ActiveFedora::OmDatastream
         t.city
     }
     t.audio_visual {
+        t.year
+        t.pages
         t.version
         t.size
         t.length
@@ -79,6 +82,11 @@ class MxdDatastream < ActiveFedora::OmDatastream
         t.doi
         t.publisher
         t.city
+    }
+    t.other {
+        t.type
+        t.date_modified
+        t.date_accessed
     }
     t.requester
     t.publication_date(index_as: [:stored_searchable, :facetable])
