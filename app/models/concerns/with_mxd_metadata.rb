@@ -14,7 +14,7 @@ module WithMxdMetadata
 
   # Attributes that require special handling on updates
   def self.special_attributes
-    [:person, :editor, :organisation, :event, :book, :details, :series, :computer_program]
+    [:person, :editor, :organisation, :event, :book, :details, :series, :computer_program, :audio_visual]
   end
 
   # Overrides attributes=
@@ -72,4 +72,40 @@ module WithMxdMetadata
     end
     return true
   end
+
+  def authority_options(authority, type)
+    case authority
+      when 'person_role'
+        Rails.logger.info "person_role - type: #{type}"
+        case type.to_s
+          when 'ComputerProgram'
+            Rails.logger.info "person_role - ComputerProgram"
+            [['',''],['Author','pau'],['Developer','pdev'],['Editor','ped'],['Illustrator', 'pil'],['Invited author','paui'],['Publisher','ppu'],
+             ['Supervisor','sup'],['Translator','ptr'],['Other','poth']]
+          when 'AudioVisual'
+            Rails.logger.info "person_role - AudioVisual"
+            [['',''],['Author','pau'],['Composer','pcom'],['Editor','ped'],['Illustrator', 'pil'],['Invited author','paui'],['Performer','pper'],
+             ['Photographer','ppho'],['Publisher','ppu'],['Supervisor','sup'],['Translator','ptr'],['Other','poth']]
+          else
+            Rails.logger.info "person_role - other"
+            [['',''],['Author','pau'],['Editor','ped'],['Illustrator', 'pil'],['Invited author','paui'],['Publisher','ppu'],
+             ['Supervisor','sup'],['Translator','ptr'],['Other','poth']]
+        end
+    end
+  end
+
+  def display_type(type=nil)
+     if type
+       name = type.to_s
+     else
+       name = self.class.to_s
+     end
+     case name
+      when 'Other'
+         "Other Contribution"
+      else
+        self.class.to_s.demodulize.titleize
+    end
+  end
+  
 end

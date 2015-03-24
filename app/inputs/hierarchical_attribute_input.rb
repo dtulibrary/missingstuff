@@ -158,6 +158,10 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
     options[:'aria-labelledby'] = label_id(field_name, index)
     @rendered_first_element = true
 
+    if select_options.class==String
+      select_options = object.authority_options(select_options, object.class)
+    end
+
     return @builder.select(attribute_name, select_options, {:selected => value}, options)
   end
 

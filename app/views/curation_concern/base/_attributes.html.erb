@@ -5,20 +5,16 @@
   </thead>
   <tbody>
   <%= curation_concern_attribute_to_html(curation_concern, :subtitle, 'Sub-title', { catalog_search_link: true }) %>
-  <%= hierarchical_attribute_to_html(curation_concern, :person, 'People', { catalog_search_link: true, localize: {:role => true} }) %>
+  <%= hierarchical_attribute_to_html(curation_concern, :person, 'People', { catalog_search_link: true, localize: {:role => true, :person_id_type => true} }) %>
   <%= hierarchical_attribute_to_html(curation_concern, :organisation, 'Organisation', { catalog_search_link: true, localize: {:role => true} }) %>
   <%= curation_concern_attribute_to_html(curation_concern, :description, 'Abstract') %>
   <%= curation_concern_attribute_to_html(curation_concern, :keyword, 'Keyword') %>
+  <%= hierarchical_attribute_to_html(curation_concern, :details, 'Publication details', { catalog_search_link: true }) %>
   <%= hierarchical_attribute_to_html(curation_concern, :book, 'Book', { catalog_search_link: true }) %>
-  <%= hierarchical_attribute_to_html(curation_concern, :event, 'Event', { catalog_search_link: true }) %>
-  <%= curation_concern_attribute_to_html(curation_concern, :contributor, 'Contributors', { catalog_search_link: true }) %>
-  <%= curation_concern_attribute_to_html(curation_concern, :subject, "Subject", { catalog_search_link: true }) %>
-  <%= curation_concern_attribute_to_html(curation_concern, :publisher, "Publisher") %>
-  <%= curation_concern_attribute_to_html(curation_concern, :publication_date, "Year", {localize: true}) %>
+  <%= hierarchical_attribute_to_html(curation_concern, :editor, 'Editor', { catalog_search_link: true }) %>
+  <%= hierarchical_attribute_to_html(curation_concern, :series, 'Series', { catalog_search_link: true }) %>
   <%= curation_concern_attribute_to_html(curation_concern, :lang, "Language", {localize: true}) %>
-  <%= curation_concern_attribute_to_html(curation_concern, :level, "Level", {localize: true}) %>
-  <%= curation_concern_attribute_to_html(curation_concern, :review, "Review", {localize: true}) %>
-  <%= curation_concern_attribute_to_html(curation_concern, :requester, "Requester", {localize: true}) %>
+  <%= curation_concern_attribute_to_html(curation_concern, :requester, "Requester", {localize: false}) %>
   <tr>
     <th>Access Rights</th>
     <td>

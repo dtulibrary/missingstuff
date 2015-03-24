@@ -8,16 +8,15 @@
 
   <%= f.input :person, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' },
               input_html: {width: 40, template: 'person',
-                  subfields: {role: {type: 'select', options: [['',''],['Author','pau'],['Supervisor','sup']]},
+                  subfields: {role: {type: 'select', options: 'person_role'},
                               person_id_type: {type: 'select', options: [['',''],['ORCID','orcid'],['Researcher ID','researcherid']]}}} %>
-  <%= f.input :editor, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' }, input_html: {template: 'editor' } %>
   <%= f.input :organisation, as: :hierarchical_attribute, label: 'Corporate Author', wrapper_html: { class: 'multi_value' },
               input_html: {width: 40, subfields: {role: {type: 'select',
                   options: [['',''],['Corporate author','oau'],['Affiliation','oaf'],['Publisher','opu']]}}} %>
 
   <%= f.input :description, as: :text, input_html: { rows: '14', type: 'textarea'} %>
 
-  <% if curation_concern.class != ComputerProgram %>
+  <% if curation_concern.class != ComputerProgram and curation_concern.class != AudioVisual %>
     <%= f.input :details, as: :hierarchical_attribute, label: 'Publication details',
                 input_html: {repeatable: 'false', template: 'publication_details', record_type: curation_concern.class} %>
   <% end %>
@@ -38,16 +37,22 @@
   <% if curation_concern.class == Book or curation_concern.class == Report %>
     <%= f.input :book, as: :hierarchical_attribute, label: false, input_html: {repeatable: 'false', template: 'monograph', record_type: curation_concern.class} %>
   <% end %>
+  <% if curation_concern.class == BookChapter or curation_concern.class == ReportChapter %>
+    <%= f.input :editor, as: :hierarchical_attribute, wrapper_html: { class: 'multi_value' }, input_html: {template: 'editor' } %>
+  <% end %>
   <% if curation_concern.class == JournalArticle %>
     <br/>
     <%= f.input :series, as: :hierarchical_attribute, label: 'Journal information', input_html: {repeatable: 'false', template: 'series'} %>
   <% else %>
-    <% if curation_concern.class != ComputerProgram %>
+    <% if curation_concern.class != ComputerProgram and curation_concern.class != AudioVisual %>
       <%= f.input :series, as: :hierarchical_attribute, label: 'Series information', input_html: {repeatable: 'false', template: 'series'} %>
     <% end %>
   <% end %>
   <% if curation_concern.class == ComputerProgram %>
     <%= f.input :computer_program, as: :hierarchical_attribute, label: false, input_html: {repeatable: 'false', template: 'computer_program'} %>
+  <% end %>
+  <% if curation_concern.class == AudioVisual %>
+    <%= f.input :audio_visual, as: :hierarchical_attribute, label: false, input_html: {repeatable: 'false', template: 'audio_visual'} %>
   <% end %>
   <div class="col-sm-6">
     <%= f.label :lang, 'Language', class: 'select optional control-label' %>

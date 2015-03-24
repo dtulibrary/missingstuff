@@ -9,4 +9,5 @@ module DtuCurationConcern
     # and eventually remove the WithWorthwhiledMetadata module (and corresponding datastream) entirely.
     include ::WithWorthwhileMetadata
   end
+
 end

@@ -1,0 +1,34 @@
+<% include_works_link ||= can_ever_create_works? %>
+<% include_collections_link ||= can?(:create, Collection) %>
+<% if include_works_link || include_collections_link %>
+  <div class="btn-group add-content">
+    <%= link_to worthwhile.new_classify_concern_path, id: "add-content", class: "btn btn-primary dropdown-toggle", data: { toggle: "dropdown"} do %>
+      <span class="icon icon-white glyphicon-plus"></span><span class="visuallyhidden">Add</span>
+    <% end %>
+    <ul class="dropdown-menu quick-create">
+      <% if include_works_link %>
+        <li>
+          <strong class="menu-heading item-with-options">Add a Work</strong>
+          <ul class="item-options quick-classify">
+            <% Worthwhile::QuickClassificationQuery.each_for_context(current_user) do |concern| %>
+              <li><%= if concern.respond_to? :display_name
+                        name = concern.display_name
+                      else
+                        name = concern.human_readable_type
+                      end 
+                      link_to("New #{name}", main_app.new_polymorphic_path([:curation_concern, concern]),
+                              class: "item-option contextual-quick-classify #{dom_class(concern, 'new').gsub('_', '-')}",
+                              role: 'menuitem')
+                  %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="divider"></li>
+      <% end %>
+      <% if include_collections_link %>
+        <li><%= link_to 'Add a Collection', collections.new_collection_path, class: 'menu-heading new-collection', role: 'menuitem' %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

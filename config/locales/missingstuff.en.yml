@@ -6,6 +6,8 @@ en:
       subtitle: "Sub-Title"
       publication_date: "Publication Year"
       person:
+        person_id_type: "ID type"
+        person_id: "ID"
         first_name: "First Name"
         last_name: "Last Name"
         role: "Role"
@@ -38,10 +40,20 @@ en:
       und: 'Undefined'
     person:
       role:
-        pau: 'Author'
-        ped: 'Editor'
-        ppu: 'Publisher'
-        sup: 'Supervisor'
+        pau:  'Author'
+        pcom: 'Composer'
+        pdev: 'Developer'
+        ped:  'Editor'
+        pil:  'Illustrator'
+        paui: 'Invited author'
+        pper: 'Performer'
+        ppho: 'Photographer'
+        ppu:  'Publisher'
+        ptr:  'Translator'
+        sup:  'Supervisor'
+      person_id_type:
+        orcid: "ORCID"
+        researcherid: "Researcher ID"
     organisation:
       role:
         oau: 'Corporate author'
