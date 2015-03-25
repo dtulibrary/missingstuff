@@ -99,6 +99,4 @@ class MxdDatastream < ActiveFedora::OmDatastream
     end
     return builder.doc
   end
-
 end
-

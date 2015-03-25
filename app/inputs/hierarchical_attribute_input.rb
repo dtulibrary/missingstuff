@@ -132,6 +132,7 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
     options[:value] = value
     if @rendered_first_element
       options[:id] = nil
+      options[:id] ||= input_dom_id(field_name, index)
       options[:required] = nil
     else
       options[:id] ||= input_dom_id(field_name, index)
@@ -149,6 +150,7 @@ class HierarchicalAttributeInput < SimpleForm::Inputs::CollectionInput
     options[:name] = "#{object_name}[#{attribute_name}][][#{field_name}]"
     if @rendered_first_element
       options[:id] = nil
+      options[:id] ||= input_dom_id(field_name, index)
       options[:required] = nil
     else
       options[:id] ||= input_dom_id(field_name, index)

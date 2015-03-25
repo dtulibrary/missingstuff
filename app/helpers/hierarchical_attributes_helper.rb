@@ -12,7 +12,7 @@ module HierarchicalAttributesHelper
           subfield_value = entry.send(subfield_key).first
           subfield_attribute_name = "#{attribute_name}_#{subfield_key}"
           search_field = subfield_attribute_name
-          unless subfield_value.nil?
+          unless subfield_value.nil? or subfield_value.empty?
             if options[:localize] && options[:localize][subfield_key]
               subfield_value = t('mapping.' + attribute_name.to_s + '.' + subfield_key.to_s + '.' + subfield_value)
             end

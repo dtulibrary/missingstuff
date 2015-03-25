@@ -94,7 +94,7 @@ module WithMxdMetadata
     end
   end
 
-  def display_type(type=nil)
+  def display_name(type=nil)
      if type
        name = type.to_s
      else
