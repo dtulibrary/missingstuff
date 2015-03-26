@@ -18,6 +18,8 @@ en:
         level4: "Level 4"
       book:
         book_title: "Title"
+      series:
+        series_title: 'Title'
   mapping:
     lang:
       und: 'Undefined'

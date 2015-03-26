@@ -16,7 +16,7 @@
       <% if curation_concern.class==ReportChapter %>
           <%= hierarchical_attribute_to_html(curation_concern, :book, 'Report information', {catalog_search_link: true}) %>
       <% else %>
-          <%= hierarchical_attribute_to_html(curation_concern, :book, false, {catalog_search_link: true}) %>
+          <%= hierarchical_attribute_to_html(curation_concern, :book, '', {catalog_search_link: true}) %>
       <% end %>
   <% end %>
   <%= hierarchical_attribute_to_html(curation_concern, :editor, 'Editor', {catalog_search_link: true}) %>
