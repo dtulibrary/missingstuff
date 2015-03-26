@@ -3,7 +3,7 @@
     <div class="col-sm-1 input">
 	<%= values[:pages] %>
     </div>
-    <% if record_type==BookChapter or record_type==ReportChapter or record_type==Other %>
+    <% if record_type==BookChapter or record_type==ReportChapter %>
         <label class="col-sm-1 inline-label">Pages</label>
         <div class="col-sm-1 inline-input">
             <%= values[:page_range] %>
@@ -18,6 +18,20 @@
         </div>
         <label class="col-sm-1 inline-label">Article no.</label>
         <div class="col-sm-2 inline-input">
+            <%= values[:article_number] %>
+        </div>
+    <% end %>
+    <% if record_type==Other %>
+        <label class="col-sm-1 inline-label">Pages</label>
+        <div class="col-sm-2 inline-input">
+            <%= values[:page_range] %>
+        </div>
+        <label class="col-sm-1 inline-label">Chapter</label>
+        <div class="col-sm-2 inline-input">
+            <%= values[:chapter] %>
+        </div>
+        <label class="col-sm-1 inline-label">Article no.</label>
+        <div class="col-sm-3 inline-input">
             <%= values[:article_number] %>
         </div>
     <% end %>
