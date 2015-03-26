@@ -4,25 +4,42 @@
   <tr><th>Attribute Name</th><th>Values</th></tr>
   </thead>
   <tbody>
-  <%= curation_concern_attribute_to_html(curation_concern, :subtitle, 'Sub-title', { catalog_search_link: true }) %>
-  <%= hierarchical_attribute_to_html(curation_concern, :person, 'People', { catalog_search_link: true, localize: {:role => true, :person_id_type => true} }) %>
-  <%= hierarchical_attribute_to_html(curation_concern, :organisation, 'Organisation', { catalog_search_link: true, localize: {:role => true} }) %>
-  <%= curation_concern_attribute_to_html(curation_concern, :description, 'Abstract') %>
-  <%= curation_concern_attribute_to_html(curation_concern, :keyword, 'Keyword') %>
-  <%= hierarchical_attribute_to_html(curation_concern, :details, 'Publication details', { catalog_search_link: true }) %>
-  <%= hierarchical_attribute_to_html(curation_concern, :book, 'Book', { catalog_search_link: true }) %>
-  <%= hierarchical_attribute_to_html(curation_concern, :editor, 'Editor', { catalog_search_link: true }) %>
-  <%= hierarchical_attribute_to_html(curation_concern, :series, 'Series', { catalog_search_link: true }) %>
-  <%= curation_concern_attribute_to_html(curation_concern, :lang, "Language", {localize: true}) %>
-  <%= curation_concern_attribute_to_html(curation_concern, :requester, "Requester", {localize: false}) %>
+  <%= curation_concern_attribute_to_html(curation_concern, :subtitle,     'Sub-title',           {catalog_search_link: true }) %>
+  <%= hierarchical_attribute_to_html    (curation_concern, :person,       'People',              {catalog_search_link: true,
+                                                                                                  localize: {:role => true, :person_id_type => true}}) %>
+  <%= hierarchical_attribute_to_html    (curation_concern, :organisation, 'Corporate author',    {catalog_search_link: true,
+                                                                                                  localize: {:role => true}}) %>
+  <%= curation_concern_attribute_to_html(curation_concern, :description,  'Abstract') %>
+  <%= curation_concern_attribute_to_html(curation_concern, :keyword,      'Keyword') %>
+  <%= hierarchical_attribute_to_html    (curation_concern, :details,      'Publication details', {catalog_search_link: true }) %>
+  <% if curation_concern.class==BookChapter %>
+      <%= hierarchical_attribute_to_html    (curation_concern, :book, 'Book information', {catalog_search_link: true }) %>
+  <% else %>
+      <% if curation_concern.class==ReportChapter %>
+          <%= hierarchical_attribute_to_html    (curation_concern, :book, 'Report information',  {catalog_search_link: true }) %>
+      <% else %>
+          <%= hierarchical_attribute_to_html    (curation_concern, :book, false,                 {catalog_search_link: true }) %>
+      <% end %>
+  <% end %>
+  <%= hierarchical_attribute_to_html    (curation_concern, :editor, 'Editor', {catalog_search_link: true }) %>
+  <% if curation_concern.class==JournalArticle %>
+      <%= hierarchical_attribute_to_html    (curation_concern, :series, 'Journal', {catalog_search_link: true }) %>
+  <% else %>
+      <%= hierarchical_attribute_to_html    (curation_concern, :series, 'Series',  {catalog_search_link: true }) %>
+  <% end %>
+  <%= hierarchical_attribute_to_html    (curation_concern, :computer_program, 'Program details', {catalog_search_link: false }) %>
+  <%= hierarchical_attribute_to_html    (curation_concern, :audio_visual, 'Audio/visual', {catalog_search_link: false }) %>
+  <%= hierarchical_attribute_to_html    (curation_concern, :other, 'Other', {catalog_search_link: false }) %>
+  <%= curation_concern_attribute_to_html(curation_concern, :lang,         'Language',            {localize: true}) %>
+  <%= curation_concern_attribute_to_html(curation_concern, :requester,    'Requester',           {localize: false}) %>
   <tr>
     <th>Access Rights</th>
     <td>
       <%= permission_badge_for(curation_concern) %>
     </td>
   </tr>
-  <%= curation_concern_attribute_to_html(curation_concern, :embargo_release_date, "Embargo Release Date") %>
-  <%= curation_concern_attribute_to_html(curation_concern, :lease_expiration_date, "Lease Expiration Date") %>
-  <%= curation_concern_attribute_to_html(curation_concern, :rights, "Content License") %>
+  <%= curation_concern_attribute_to_html(curation_concern, :embargo_release_date,  'Embargo Release Date') %>
+  <%= curation_concern_attribute_to_html(curation_concern, :lease_expiration_date, 'Lease Expiration Date') %>
+  <%= curation_concern_attribute_to_html(curation_concern, :rights,                'Content License') %>
   </tbody>
 </table>
