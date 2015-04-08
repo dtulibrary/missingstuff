@@ -44,29 +44,29 @@ module MxdSolrDocumentExtension
     year = 0
     if cc.respond_to? :book
       hierarchical_attribute_collection(cc, :book).each do |fld|
-        if fld.year
-          year = fld.year
+        if !fld.year.first.empty?
+          year = fld.year.first
         end
       end
     end
     if year == 0 and cc.respond_to? :series
       hierarchical_attribute_collection(cc, :series).each do |fld|
-        if fld.year
-          year = fld.year
+        if !fld.year.first.empty?
+          year = fld.year.first
         end
       end
     end
     if year == 0  and cc.respond_to? :computer_program
       hierarchical_attribute_collection(cc, :computer_program).each do |fld|
-        if fld.year
-          year = fld.year
+        if !fld.year.first.empty?
+          year = fld.year.first
         end
       end
     end
     if year == 0 and cc.respond_to? :audio_visual
       hierarchical_attribute_collection(cc, :audio_visual).each do |fld|
-        if fld.year
-          year = fld.year
+        if !fld.year.empty?
+          year = fld.year.first
         end
       end
     end
@@ -105,24 +105,20 @@ module MxdSolrDocumentExtension
       hierarchical_attribute_collection(cc, :person).each do |person|
         xml.mxd(:person, pers_role:person.role.first, aff_no:affno) {
           xml.mxd(:name) {
-            xml.mxd(:first, person.first_name.first)
-            xml.mxd(:last,  person.last_name.first)
+            xml_field(xml, :first, person.first_name)
+            xml_field(xml, :last, person.last_name)
           }
-          if person.person_id.first
-            xml.mxd(:id, id_type:person.person_id_type.first) {
-              xml.text! person.person_id.first
-            }
-          end
+          xml_field(xml, :id, person.person_id, id_type:person.person_id_type)
         }
         if person.affiliation.first
           afflist[affno] = person.affiliation.first
         end
-        aff_no += 1
+        affno += 1
       end
       hierarchical_attribute_collection(cc, :organisation).each do |org|
         xml.mxd(:organisation, org_role:'oau') {
           xml.mxd(:name) {
-            xml.mxd(:level1, org.name.first)
+            xml_field(xml, :level1, org.name)
           }
         }
       end
@@ -132,6 +128,26 @@ module MxdSolrDocumentExtension
             xml.mxd(:name) {
               xml.mxd(:level1, aff)
             }
+          }
+        end
+      end
+      xml.mxd(:local_field, tag_type:'4') {
+        xml.mxd(:code, 'type')
+        xml.mxd(:data, cc.class.to_s)
+      }
+      if cc.class == Other
+        hierarchical_attribute_collection(cc, :other).each do |fld|
+          xml.mxd(:local_field, tag_type:'4') {
+            xml.mxd(:code, 'textType')
+            xml_field(xml, :data, fld.type)
+          }
+          xml.mxd(:local_field, tag_type:'4') {
+            xml.mxd(:code, 'lastModified')
+            xml_field(xml, :data, fld.date_modified)
+          }
+          xml.mxd(:local_field, tag_type:'4') {
+            xml.mxd(:code, 'lastAccessed')
+            xml_field(xml, :data, fld.date_accessed)
           }
         end
       end
@@ -150,45 +166,169 @@ module MxdSolrDocumentExtension
         artno   = fld.article_number.first
         repno   = fld.report_number.first
       end
+      xml_field(xml, :id, details(cc, :doi), type:'doi')
+      xml_field(xml, :id, details(cc, :article_number), type:'article_number')
       xml.mxd(:publication) {
-        if cc.class == Book or cc.class == BookChapter
+        if cc.class == Book or cc.class == BookChapter or cc.class == LectureNote or cc.class == Report or cc.class == ReportChapter or cc.class == Other
           hierarchical_attribute_collection(cc, :book).each do |book|
-              if cc.class == Book
+            case cc.class.to_s
+              when 'Book'
                 xml.mxd(:book) {
-                  xml.mxd(:edition, book.edition.first)
-                  xml.mxd(:isbn, type:'print') {
-                    xml.text!  book.isbn.first
-                  }
-                  xml.mxd(:isbn, type:'electronic') {
-                    xml.text!  book.eisbn.first
-                  }
-                  xml_field(xml, :isbn, book.eisbn.first, type:'electronic')
-                  xml.mxd(:place, book.city.first)
-                  xml.mxd(:publisher, book.publisher.first)
-                  xml.mxd(:year, book.year.first)
+                  xml_field(xml, :edition, book.edition)
+                  xml_field(xml, :isbn, book.isbn, type:'print')
+                  xml_field(xml, :isbn, book.eisbn, type:'electronic')
+                  xml_field(xml, :doi, book.doi)
+                  xml_field(xml, :place, book.city)
+                  xml_field(xml, :publisher, book.publisher)
+                  xml_field(xml, :year, book.year)
+                  xml_field(xml, :vol, book.volume)
+                  xml_field(xml, :pages, details(cc, :pages))
+                  xml_field(xml, :series, series(cc))
                 }
-              else
+              when 'BookChapter'
                 xml.mxd(:in_book) {
-                  xml.mxd(:title, book.book_title.first)
-                  xml.mxd(:edition, book.edition.first)
-                  xml.mxd(:isbn, book.isbn.first)
-                  xml.mxd(:publisher, book.publisher.first)
+                  xml_field(xml, :title, book.book_title)
+                  xml_field(xml, :sub_title, book.book_subtitle)
+                  xml_field(xml, :edition, book.edition)
+                  xml_field(xml, :editor, editor(cc))
+                  xml_field(xml, :isbn, book.isbn, type:'print')
+                  xml_field(xml, :isbn, book.eisbn, type:'electronic')
+                  xml_field(xml, :place, book.city)
+                  xml_field(xml, :publisher, book.publisher)
+                  xml_field(xml, :year, book.year)
+                  xml_field(xml, :doi, book.doi)
+                  xml_field(xml, :vol, book.volume)
+                  xml_field(xml, :pages, details(cc, :pages))
+                  xml_field(xml, :pages_range, details(cc, :page_range))
+                  xml_field(xml, :chapter, details(cc, :chapter))
+                  xml_field(xml, :series, series(cc))
                 }
-              end
+              when 'LectureNote'
+                xml.mxd(:lecture_notes) {
+                  xml_field(xml, :edition, book.edition)
+                  xml_field(xml, :isbn, book.isbn, type:'print')
+                  xml_field(xml, :isbn, book.eisbn, type:'electronic')
+                  xml_field(xml, :doi, book.doi)
+                  xml_field(xml, :place, book.city)
+                  xml_field(xml, :publisher, book.publisher)
+                  xml_field(xml, :year, book.year)
+                  xml_field(xml, :vol, book.volume)
+                  xml_field(xml, :pages, details(cc, :pages))
+                  xml_field(xml, :series, series(cc))
+                }
+              when 'Report'
+                xml.mxd(:report) {
+                  xml_field(xml, :edition, book.edition)
+                  xml_field(xml, :isbn, book.isbn, type:'print')
+                  xml_field(xml, :isbn, book.eisbn, type:'electronic')
+                  xml_field(xml, :series, series(cc))
+                  xml_field(xml, :rep_no, details(cc, :report_number))
+                  xml_field(xml, :doi, book.doi)
+                  xml_field(xml, :place, book.city)
+                  xml_field(xml, :publisher, book.publisher)
+                  xml_field(xml, :year, book.year)
+                  xml_field(xml, :vol, book.volume)
+                  xml_field(xml, :pages, details(cc, :pages))
+                }
+              when 'ReportChapter'
+                xml.mxd(:in_report) {
+                  xml_field(xml, :title, book.book_title)
+                  xml_field(xml, :sub_title, book.book_subtitle)
+                  xml_field(xml, :edition, book.edition)
+                  xml_field(xml, :editor, editor(cc))
+                  xml_field(xml, :isbn, book.isbn, type:'print')
+                  xml_field(xml, :isbn, book.eisbn, type:'electronic')
+                  xml_field(xml, :place, book.city)
+                  xml_field(xml, :publisher, book.publisher)
+                  xml_field(xml, :year, book.year)
+                  xml_field(xml, :doi, book.doi)
+                  xml_field(xml, :vol, book.volume)
+                  xml_field(xml, :pages, details(cc, :pages))
+                  xml_field(xml, :pages_range, details(cc, :page_range))
+                  xml_field(xml, :chapter, details(cc, :chapter))
+                  xml_field(xml, :series, series(cc))
+                }
+              when 'Other'
+                xml.mxd(:other) {
+                  xml_field(xml, :title, book.book_title)
+                  xml_field(xml, :sub_title, book.book_subtitle)
+                  xml_field(xml, :edition, book.edition)
+                  xml_field(xml, :editor, editor(cc))
+                  xml_field(xml, :isbn, book.isbn, type:'print')
+                  xml_field(xml, :isbn, book.eisbn, type:'electronic')
+                  xml_field(xml, :place, book.city)
+                  xml_field(xml, :publisher, book.publisher)
+                  xml_field(xml, :year, book.year)
+                  xml_field(xml, :doi, book.doi)
+                  xml_field(xml, :vol, book.volume)
+                  xml_field(xml, :pages, details(cc, :pages))
+                  xml_field(xml, :pages_range, details(cc, :page_range))
+                  xml_field(xml, :chapter, details(cc, :chapter))
+                  xml_field(xml, :series, series(cc))
+                }
+            end
           end
         end
+        if cc.class == JournalArticle and cc.respond_to? :series
+          hierarchical_attribute_collection(cc, :series).each do |fld|
+            if !fld.series_title.first.empty?
+              xml.mxd(:in_journal) {
+                xml_field(xml, :title, fld.series_title)
+                xml_field(xml, :issn, fld.issn, type:'print')
+                xml_field(xml, :issn, fld.eissn, type:'electronic')
+                xml_field(xml, :year, fld.year)
+                xml_field(xml, :volume, fld.volume)
+                xml_field(xml, :issue, fld.number)
+                xml_field(xml, :pages, details(cc, :pages))
+                xml_field(xml, :pages_range, details(cc, :page_range))
+                xml_field(xml, :publisher, fld.publisher)
+                xml_field(xml, :country, fld.country)
+              }
+            end
+          end
+        end
+        if cc.class == AudioVisual
+          hierarchical_attribute_collection(cc, :audio_visual).each do |av|
+            xml.mxd(:audio_visual) {
+              xml_field(xml, :year, av.year)
+              xml_field(xml, :pages, av.pages)
+              xml_field(xml, :version, av.version)
+              xml_field(xml, :size, av.size)
+              xml_field(xml, :length, av.length)
+              xml_field(xml, :media, av.media)
+              xml_field(xml, :doi, av.doi)
+              xml_field(xml, :publisher, av.publisher)
+              xml_field(xml, :city, av.city)
+            }
+          end
+        end
+        if cc.class == ComputerProgram
+          hierarchical_attribute_collection(cc, :computer_program).each do |cp|
+            xml.mxd(:computer_program) {
+              xml_field(xml, :year, cp.year)
+              xml_field(xml, :version, cp.version)
+              xml_field(xml, :size, cp.size)
+              xml_field(xml, :media, cp.output_media)
+              xml_field(xml, :doi, cp.doi)
+              xml_field(xml, :publisher, cp.publisher)
+              xml_field(xml, :city, cp.city)
+            }
+          end
+        end
+#       Linked resources
         if cc.linked_resources.present?
           cc.linked_resources.each do |link|
             xml.mxd(:inetpub) {
               if link.title and link.title.length > 0
-                xml.mxd(:text, link.title)
+                xml_field(xml, :text, link.title)
               else
-                xml.mxd(:text, link.url)
+                xml_field(xml, :text, link.url)
               end
-              xml.mxd(:url, link.url)
+              xml_field(xml, :url, link.url)
             }
           end
         end
+#       Files
         cc.generic_files.each do |file|
           hash = file.to_solr.stringify_keys
           access = 'na'
@@ -204,21 +344,114 @@ module MxdSolrDocumentExtension
             end
           end
           xml.mxd(:digital_object, id: file.pid, access: access) {
-            xml.mxd(:file, filename: file.title.first)
-            xml.mxd(:uri, "http://missingStuff.dtic.dk/downloads/#{file.pid}")
+            xml_field(xml, :file, nil, filename:file.title)
+            xml_field(xml, :uri, "http://missingStuff.dtic.dk/downloads/#{file.pid}")
           }
+        end
+        if cc.class != JournalArticle and cc.respond_to? :series
+          hierarchical_attribute_collection(cc, :series).each do |fld|
+            if !fld.series_title.first.empty?
+              xml.mxd(:series) {
+                xml_field(xml, :title, fld.series_title)
+                xml_field(xml, :volume, fld.volume)
+                xml_field(xml, :number, fld.number)
+                xml_field(xml, :issn, fld.issn, type:'print')
+                xml_field(xml, :issn, fld.eissn, type:'electronic')
+                xml_field(xml, :publisher, fld.publisher)
+                xml_field(xml, :country, fld.country)
+              }
+            end
+          end
         end
       }
     end
   end
 
-  def xml_field(xml, fld, body, attr)
-    if body.nil?
-        xml.mxd(fld, attr)
-    else
-        xml.mxd(fld, attr) {
-          xml.text! body
-        }
+  def xml_field(xml, fld, body, attributes={})
+    Rails.logger.info "xml_field(fld:'#{fld}, body:'#{body}', attributes:'#{attributes.inspect}"
+    attr = {}
+    attributes.each_pair do |key, value|
+      if value.class == String
+        attr[key] = value
+      else
+        attr[key] = value.first
+      end
     end
+    if body.nil?
+      valid=false
+      if !attr.nil?
+        attr.each_value do |a|
+          if !a.nil? and !a.empty?
+            valid=true
+          end
+        end
+      end
+      if valid
+        xml.mxd(fld, attr)
+      end
+    else
+      if body.class == String
+        if !body.empty?
+          xml.mxd(fld, attr) {
+            xml.text! body
+          }
+        end
+      else
+        body.each do |b|
+          if !b.empty?
+            xml.mxd(fld, attr) {
+              xml.text! b
+            }
+          end
+        end
+      end
+    end
+  end
+
+  def details(cc, field)
+    if cc.respond_to? :details
+      hierarchical_attribute_collection(cc, :details).each do |fld|
+        begin
+          val = fld.send(field).first
+          if val.nil? or val.empty?
+            return ''
+          else
+            return val
+          end
+          rescue NoMethodError
+            return ''
+        end
+      end
+    end
+    return ''
+  end
+
+  def series(cc)
+    if cc.respond_to? :series
+      hierarchical_attribute_collection(cc, :series).each do |fld|
+        val = fld.series_title.first
+        if val.nil? or val.empty?
+          return ''
+        else
+          return val
+        end
+      end
+    end
+    return ''
+  end
+
+  def editor(cc)
+    if cc.respond_to? :editor
+      hierarchical_attribute_collection(cc, :editor).each do |fld|
+        if fld.last_name.first.nil? and fld.first_name.first.nil?
+          return ''
+        end
+        if fld.last_name.first.empty? and fld.first_name.first.empty?
+          return ''
+        end
+        return "#{fld.last_name.first}, #{fld.first_name.first}"
+      end
+    end
+    return '' 
   end
 end
