@@ -18,6 +18,7 @@ en:
         level4: "Level 4"
       book:
         book_title: "Title"
+        book_subtitle: "Sub-title"
       series:
         series_title: 'Title'
   mapping:

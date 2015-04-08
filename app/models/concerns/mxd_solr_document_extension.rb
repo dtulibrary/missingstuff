@@ -28,10 +28,47 @@ module MxdSolrDocumentExtension
         type = 'db'
       when 'BookChapter'
         type = 'dba'
+      when 'ComputerProgram'
+        type = 'dso'
+      when 'JournalArticle'
+        type = 'dja'
       when 'LectureNote'
         type = 'dln'
+      when 'Report'
+        type = 'dr'
+      when 'ReportChapter'
+        type = 'dra'
       else
         type = 'do'
+    end
+    year = 0
+    if cc.respond_to? :book
+      hierarchical_attribute_collection(cc, :book).each do |fld|
+        if fld.year
+          year = fld.year
+        end
+      end
+    end
+    if year == 0 and cc.respond_to? :series
+      hierarchical_attribute_collection(cc, :series).each do |fld|
+        if fld.year
+          year = fld.year
+        end
+      end
+    end
+    if year == 0  and cc.respond_to? :computer_program
+      hierarchical_attribute_collection(cc, :computer_program).each do |fld|
+        if fld.year
+          year = fld.year
+        end
+      end
+    end
+    if year == 0 and cc.respond_to? :audio_visual
+      hierarchical_attribute_collection(cc, :audio_visual).each do |fld|
+        if fld.year
+          year = fld.year
+        end
+      end
     end
     xml = Builder::XmlMarkup.new
     xml.tag!("mxd:ddf_doc",
@@ -39,7 +76,7 @@ module MxdSolrDocumentExtension
              "xmlns:xsi"=>"http://www.w3.org/2001/XMLSchema-instance",
              "xmlns:xs"=>"http://www.w3.org/2001/XMLSchema",
              format_version: "1.3.0", doc_type:type, doc_lang:cc.lang,
-             doc_year:cc.publication_date, doc_review:cc.review, doc_level:cc.level, rec_source:"dtu",
+             doc_year:year, doc_review:'und', doc_level:'und', rec_source:"dtu",
              rec_id:cc.id, rec_created:self["system_create_dtsi"], rec_upd:self["system_modified_dtsi"], rec_status:"c") do
       xml.mxd(:title) {
         xml.mxd(:original,"xml:lang"=>cc.lang) {
@@ -49,7 +86,7 @@ module MxdSolrDocumentExtension
           end
         }
       }
-      if cc.description or cc.keyword.length > 0
+      if !cc.description.empty? or cc.keyword.length > 0
         xml.mxd(:description) {
           xml.mxd(:abstract, cc.description)
           if cc.keyword.length > 0
@@ -63,35 +100,38 @@ module MxdSolrDocumentExtension
           end
         }
       end
+      affno = 1
+      afflist = []
       hierarchical_attribute_collection(cc, :person).each do |person|
-        xml.mxd(:person, pers_role:person.role.first) {
+        xml.mxd(:person, pers_role:person.role.first, aff_no:affno) {
           xml.mxd(:name) {
             xml.mxd(:first, person.first_name.first)
             xml.mxd(:last,  person.last_name.first)
           }
+          if person.person_id.first
+            xml.mxd(:id, id_type:person.person_id_type.first) {
+              xml.text! person.person_id.first
+            }
+          end
         }
+        if person.affiliation.first
+          afflist[affno] = person.affiliation.first
+        end
+        aff_no += 1
       end
       hierarchical_attribute_collection(cc, :organisation).each do |org|
-        xml.mxd(:organisation, pers_role:org.role.first) {
+        xml.mxd(:organisation, org_role:'oau') {
           xml.mxd(:name) {
-            xml.mxd(:level1, org.level1.first)
-            xml.mxd(:level2, org.level2.first)
-            xml.mxd(:level3, org.level3.first)
-            xml.mxd(:level4, org.level4.first)
+            xml.mxd(:level1, org.name.first)
           }
         }
       end
-      if cc.class == LectureNote
-        hierarchical_attribute_collection(cc, :event).each do |event|
-          xml.mxd(:event) {
-            xml.mxd(:title) {
-              xml.mxd(:full, event.title.first)
+      afflist.each_with_index do |aff,i|
+        if aff
+          xml.mxd(:organisation, org_role:'oaf', aff_no:i) {
+            xml.mxd(:name) {
+              xml.mxd(:level1, aff)
             }
-            xml.mxd(:dates) {
-              xml.mxd(:start, event.start.first)
-              xml.mxd(:end, event.end.first)
-            }
-            xml.mxd(:place, event.place.first)
           }
         end
       end
@@ -101,14 +141,31 @@ module MxdSolrDocumentExtension
           xml.mxd(:data, req)
         }
       end
+      range = chapter = pages = doi = artno = repno = nil;
+      hierarchical_attribute_collection(cc, :details).each do |fld|
+        range   = fld.page_range.first
+        chapter = fld.chapter.first
+        pages   = fld.pages.first
+        doi     = fld.doi.first
+        artno   = fld.article_number.first
+        repno   = fld.report_number.first
+      end
       xml.mxd(:publication) {
         if cc.class == Book or cc.class == BookChapter
           hierarchical_attribute_collection(cc, :book).each do |book|
               if cc.class == Book
                 xml.mxd(:book) {
                   xml.mxd(:edition, book.edition.first)
-                  xml.mxd(:isbn, book.isbn.first)
+                  xml.mxd(:isbn, type:'print') {
+                    xml.text!  book.isbn.first
+                  }
+                  xml.mxd(:isbn, type:'electronic') {
+                    xml.text!  book.eisbn.first
+                  }
+                  xml_field(xml, :isbn, book.eisbn.first, type:'electronic')
+                  xml.mxd(:place, book.city.first)
                   xml.mxd(:publisher, book.publisher.first)
+                  xml.mxd(:year, book.year.first)
                 }
               else
                 xml.mxd(:in_book) {
@@ -152,6 +209,16 @@ module MxdSolrDocumentExtension
           }
         end
       }
+    end
+  end
+
+  def xml_field(xml, fld, body, attr)
+    if body.nil?
+        xml.mxd(fld, attr)
+    else
+        xml.mxd(fld, attr) {
+          xml.text! body
+        }
     end
   end
 end
