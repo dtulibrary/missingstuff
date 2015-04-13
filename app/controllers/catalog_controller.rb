@@ -21,8 +21,14 @@ class CatalogController < ApplicationController
   # get search results from the solr index
   # Overriding this method in order to enable rendering of OAI-PMH responses when .oaipmh is the requested format
   def index
+    respond_to do |format|
+      format.html {
+        if params['f'].nil?
+          params['f'] = {'generic_type_sim' => ['Work']}
+        end
+      }
+    end
     (@response, @document_list) = get_search_results
-
     respond_to do |format|
       format.html { }
       format.rss  { render :layout => false }

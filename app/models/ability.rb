@@ -14,7 +14,10 @@ class Ability
 
     # Limits creating new objects to a specific group
     if user_groups.include? 'catalog'
-      can [:create], ActiveFedora::Base
+      can [:create, :edit, :update], :all
+    end
+    if user_groups.include? 'admin'
+      can [:discover, :show, :read, :edit, :update, :create, :destroy], :all
     end
   end
 end

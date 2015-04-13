@@ -10,7 +10,7 @@
       <li><%= link_to 'My Works', search_path_for_my_works, class: 'my-works', role: 'menuitem' %></li>
     <% end %>
     <% if include_collections_link %>
-      <li><%= link_to 'My Collections', search_path_for_my_collections, class: 'my-collections', role: 'menuitem' %></li>
+      <li><%# link_to 'My Collections', search_path_for_my_collections, class: 'my-collections', role: 'menuitem' %></li>
     <% end %>
     <% if include_works_link || include_collections_link %>
       <li class="divider"></li>
