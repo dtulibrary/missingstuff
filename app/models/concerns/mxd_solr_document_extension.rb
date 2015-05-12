@@ -44,28 +44,28 @@ module MxdSolrDocumentExtension
     year = 0
     if cc.respond_to? :book
       hierarchical_attribute_collection(cc, :book).each do |fld|
-        if !fld.year.first.empty?
+        if !fld.year.first.nil? and !fld.year.first.empty?
           year = fld.year.first
         end
       end
     end
     if year == 0 and cc.respond_to? :series
       hierarchical_attribute_collection(cc, :series).each do |fld|
-        if !fld.year.first.empty?
+        if !fld.year.first.nil? and !fld.year.first.empty?
           year = fld.year.first
         end
       end
     end
     if year == 0  and cc.respond_to? :computer_program
       hierarchical_attribute_collection(cc, :computer_program).each do |fld|
-        if !fld.year.first.empty?
+        if !fld.year.first.nil? and !fld.year.first.empty?
           year = fld.year.first
         end
       end
     end
     if year == 0 and cc.respond_to? :audio_visual
       hierarchical_attribute_collection(cc, :audio_visual).each do |fld|
-        if !fld.year.empty?
+        if !fld.year.first.nil? and !fld.year.empty?
           year = fld.year.first
         end
       end
