@@ -7,7 +7,7 @@ gem 'worthwhile', github:'projecthydra-labs/worthwhile', ref:'92221695093474702c
 gem 'capistrano', '~> 2.15.5', group: :development
 gem 'blacklight_oai_provider' , github:'cbeer/blacklight_oai_provider'
 gem 'oai' , github:'code4lib/ruby-oai'
-gem 'dtu_rails_common', :github => 'dtulibrary/dtu_rails_common'
+gem 'dtu_rails_common', '>= 0.0.3', :github => 'dtulibrary/dtu_rails_common'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'

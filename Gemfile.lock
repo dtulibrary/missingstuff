@@ -18,9 +18,9 @@ GIT
 
 GIT
   remote: git://github.com/dtulibrary/dtu_rails_common.git
-  revision: cf0e756791f250070afba60ff4785c5e370b9664
+  revision: 854ed6d006c58512df88f84061ca5d8f96d795ef
   specs:
-    dtu_rails_common (0.0.2)
+    dtu_rails_common (0.0.3)
       bootstrap-sass (~> 3.3.0)
       devise (~> 3.4.1)
       httparty
@@ -233,12 +233,12 @@ GEM
       signet (~> 0.6)
     haml (4.0.6)
       tilt
-    hashie (3.3.2)
+    hashie (3.4.2)
     highline (1.6.21)
     hike (1.2.3)
     htmlentities (4.3.3)
     http_logger (0.5.1)
-    httparty (0.13.3)
+    httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     hydra-collections (4.0.0.beta4)
@@ -564,7 +564,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   devise-guests (~> 0.3)
-  dtu_rails_common!
+  dtu_rails_common (>= 0.0.3)!
   factory_girl
   hydra-head!
   jbuilder (~> 2.0)
